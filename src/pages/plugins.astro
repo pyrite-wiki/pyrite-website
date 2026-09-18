@@ -33,10 +33,10 @@ const extensions = [
     tools: "Engagement tracking tools",
   },
   {
-    name: "task",
-    purpose: "Work coordination",
-    types: "Tasks with 7-state workflow, atomic claim, decomposition",
-    tools: "Task lifecycle, assignment, DAG queries",
+    name: "journalism-investigation",
+    purpose: "Investigative research",
+    types: "Sources, claims, actors, evidence chains",
+    tools: "Investigation setup, cross-KB source and claim search",
   },
 ];
 ---
@@ -51,6 +51,12 @@ const extensions = [
       Pyrite's plugin protocol lets extensions add custom entry types, MCP
       tools, CLI commands, validators, lifecycle hooks, and relationship
       semantics. Six extensions ship out of the box.
+    </p>
+    <p class="text-text-secondary mb-12">
+      Task management used to live here as an extension. It is now built in:
+      <code class="text-text-primary">task</code> is a core entry type with its own
+      MCP tools, a <code class="text-text-primary">pyrite task</code> command group,
+      and per-type state machines.
     </p>
 
     <div class="space-y-6">
@@ -81,7 +87,7 @@ const extensions = [
     <div class="mt-16">
       <h2 class="text-2xl font-bold mb-4">Build your own</h2>
       <p class="text-text-secondary mb-6">
-        The plugin protocol exposes 16 extension points. A minimal plugin is a
+        The plugin protocol exposes 19 extension points. A minimal plugin is a
         Python class with a <code class="text-text-primary">name</code> attribute
         and one or more methods.
       </p>

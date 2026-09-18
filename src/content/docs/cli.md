@@ -80,8 +80,8 @@ bash deploy/selfhost/setup.sh kb.example.com
 ```bash
 git clone https://github.com/markramm/pyrite.git
 cd pyrite
-pip install .                  # Core
-pip install ".[all]"           # Everything
-pip install ".[ai]"            # LLM providers
-pip install ".[semantic]"      # Vector search
+pip install -e .                  # Core
+pip install -e ".[all]"           # Everything
+pip install -e ".[ai]"            # LLM providers
+pip install -e ".[semantic]"      # Vector search
 ```

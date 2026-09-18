@@ -13,9 +13,11 @@ Each tier includes the tools from lower tiers.
 
 | Tier | Tools |
 |------|-------|
-| **read** (14) | `kb_list`, `kb_search`, `kb_get`, `kb_timeline`, `kb_tags`, `kb_backlinks`, `kb_stats`, `kb_schema`, `kb_orient`, `kb_batch_read`, `kb_list_entries`, `kb_recent`, `kb_qa_validate`, `kb_qa_status` |
-| **write** (+6) | read + `kb_create`, `kb_bulk_create`, `kb_update`, `kb_delete`, `kb_link`, `kb_qa_assess` |
-| **admin** (+4) | write + `kb_index_sync`, `kb_manage`, `kb_commit`, `kb_push` |
+| **read** (29) | `kb_list`, `kb_search`, `kb_get`, `kb_timeline`, `kb_tags`, `kb_backlinks`, `kb_stats`, `kb_schema`, `kb_orient`, `kb_batch_read`, `kb_batch_suggest`, `kb_discover_neighbors`, `kb_list_entries`, `kb_recent`, `kb_qa_validate`, `kb_qa_status`, `kb_read_body`, `kb_find_by_status`, `kb_find_by_assignee`, `kb_find_by_location`, `kb_find_overdue`, `kb_index_job_status`, `list_edge_types`, `task_list`, `task_status`, `task_ancestors`, `task_blocked_by`, `task_critical_path`, `task_subtree` |
+| **write** (+11) | read + `kb_create`, `kb_bulk_create`, `kb_update`, `kb_delete`, `kb_link`, `kb_qa_assess`, `task_create`, `task_update`, `task_claim`, `task_checkpoint`, `task_decompose` |
+| **admin** (+8) | write + `kb_index_sync`, `kb_manage`, `kb_commit`, `kb_push`, `kb_registry_add`, `kb_registry_remove`, `kb_registry_reindex`, `kb_registry_health` |
+
+48 tools at the admin tier.
 
 ## Starting the server
 
@@ -37,6 +39,10 @@ pyrite mcp --tier write
 - **`kb_batch_read`** — fetch multiple entries in a single call
 - **`kb_bulk_create`** — create up to 50 entries per call with best-effort semantics
 - **`kb_schema`** — inspect type definitions, field schemas, and validation rules
+- **`task_claim`** — atomically claim a task, so parallel agents never take the same work
+- **`task_decompose`** / **`task_critical_path`** — break work down and query the dependency DAG
+
+Refused calls return stable error codes (`VALIDATION_FAILED`, `NOT_FOUND`, `READ_ONLY`) with `retryable: false`, so an agent does not retry a call that cannot succeed.
 
 All paginated tools support `limit`/`offset` params and return a `has_more` flag. Search results return snippets by default — use `include_body` for full text, `fields` for projection.
 

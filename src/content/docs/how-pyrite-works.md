@@ -74,7 +74,7 @@ Pyrite supports three search modes:
 | **semantic** | Vector similarity via sentence-transformers | Conceptual queries, "things like X" |
 | **hybrid** | Both, with reciprocal rank fusion | General-purpose — best of both |
 
-Keyword search works out of the box. Semantic search requires installing the semantic extra (`pip install ".[semantic]"` from the repo) and a one-time embedding step (`pyrite index embed`).
+Keyword search works out of the box. Semantic search requires installing the semantic extra (`pip install -e ".[semantic]"` from the repo) and a one-time embedding step (`pyrite index embed`).
 
 ## Typed entries
 
