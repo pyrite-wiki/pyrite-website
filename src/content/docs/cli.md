@@ -5,7 +5,7 @@ order: 7
 section: reference
 ---
 
-All commands support `--format json` for agent consumption.
+All commands support `--format json` for agent consumption. `pyrite --version` (or `-V`) prints the installed version.
 
 ## Search
 
@@ -50,8 +50,13 @@ pyrite create --kb=research --type=person --title="Jane Doe" \
 # Re-index after editing files directly
 pyrite index sync
 
-# Check for stale or missing entries
+# Check for stale or missing entries. Exits 1 when unhealthy, so CI can
+# gate on it; --no-fail restores the always-0 behaviour. -k scopes to one KB.
 pyrite index health
+pyrite index health -k research
+
+# Embed queued entries (semantic search is eventually consistent)
+pyrite index embed
 
 # Auto-discover KBs by kb.yaml presence
 pyrite kb discover
@@ -80,8 +85,8 @@ bash deploy/selfhost/setup.sh kb.example.com
 ```bash
 git clone https://github.com/markramm/pyrite.git
 cd pyrite
-pip install .                  # Core
-pip install ".[all]"           # Everything
-pip install ".[ai]"            # LLM providers
-pip install ".[semantic]"      # Vector search
+pip install -e .                  # Core
+pip install -e ".[all]"           # Everything
+pip install -e ".[ai]"            # LLM providers
+pip install -e ".[semantic]"      # Vector search
 ```

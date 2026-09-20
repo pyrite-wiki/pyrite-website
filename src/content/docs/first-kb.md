@@ -68,18 +68,20 @@ pyrite get sarah-chen -k my-brain
 
 ## Connect to Claude
 
-Add Pyrite's MCP server to your Claude configuration:
+Run `pyrite mcp-setup` to add Pyrite's MCP server to your Claude configuration, or add it by hand:
 
 ```json
 {
   "mcpServers": {
     "pyrite": {
-      "command": "pyrite",
+      "command": "/absolute/path/to/.venv/bin/pyrite",
       "args": ["mcp"]
     }
   }
 }
 ```
+
+Use the absolute path (`which pyrite`) — Claude Desktop does not see your shell's PATH or an activated venv.
 
 Restart Claude Desktop (or Claude Code), and you can now ask Claude things like:
 

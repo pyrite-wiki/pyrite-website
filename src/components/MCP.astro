@@ -1,4 +1,5 @@
 ---
+import { counts } from "../data/release";
 ---
 
 <section class="px-6 py-20 max-w-4xl mx-auto">
@@ -20,7 +21,8 @@
             >read</span
           >
           <span class="text-text-secondary"
-            >Search, browse, explore — 14 tools. Safe for untrusted agents.</span
+            >Search, browse, explore, query tasks — {counts.mcpRead} tools, plugin
+            tools included. Safe for untrusted agents.</span
           >
         </div>
         <div class="flex items-start gap-3">
@@ -29,8 +31,8 @@
             >write</span
           >
           <span class="text-text-secondary"
-            >Create, update, delete, link entries — +6 tools. For your own
-            agents.</span
+            >Create, update, delete, link entries, drive tasks — +{counts.mcpWriteAdds} tools,
+            {counts.mcpWrite} in all. For your own agents.</span
           >
         </div>
         <div class="flex items-start gap-3">
@@ -39,7 +41,8 @@
             >admin</span
           >
           <span class="text-text-secondary"
-            >Index management, git operations — +4 tools. For you.</span
+            >Index management, git operations, KB registry — +{counts.mcpAdminAdds} tools,
+            {counts.mcpAdmin} in all. For you.</span
           >
         </div>
       </div>
@@ -55,13 +58,22 @@
         <p class="pl-4">"mcpServers": {"{"}</p>
         <p class="pl-8">"pyrite": {"{"}</p>
         <p class="pl-12">
-          "command": "<span class="text-pyrite-400">pyrite</span>",
+          "command": "<span class="text-pyrite-400"
+            >/path/to/.venv/bin/pyrite</span
+          >",
         </p>
         <p class="pl-12">"args": ["<span class="text-pyrite-400">mcp</span>"]</p>
         <p class="pl-8">{"}"}</p>
         <p class="pl-4">{"}"}</p>
         <p>{"}"}</p>
       </div>
+      <p class="text-text-muted text-xs mt-3 leading-relaxed">
+        Use the absolute path from <code class="text-text-secondary"
+          >which pyrite</code
+        > — Claude Desktop does not see your shell's PATH or an activated venv.
+        Or run <code class="text-text-secondary">pyrite mcp-setup</code> to write
+        this config for you.
+      </p>
     </div>
   </div>
 </section>

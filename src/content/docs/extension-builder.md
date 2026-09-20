@@ -253,7 +253,7 @@ The plugin protocol supports much more:
 | Method | Purpose |
 |--------|---------|
 | `get_mcp_tools(tier)` | Add MCP tools per access tier |
-| `get_cli_app()` | Add CLI subcommands |
+| `get_cli_commands()` | Add CLI subcommands |
 | `get_hooks()` | Lifecycle hooks (before/after save and delete) |
 | `get_db_tables()` | Custom SQLite tables |
 | `get_workflows()` | State machine definitions |
@@ -272,5 +272,5 @@ Six extensions ship with Pyrite:
 | **zettelkasten** | Notes with maturity levels | CEQRC knowledge workflow |
 | **encyclopedia** | Articles, reviews | Collaborative knowledge |
 | **cascade** | Timeline events, actors | Chronological research |
-| **task** | Tasks with 7-state workflow | Work coordination |
+| **journalism-investigation** | Sources, claims, evidence chains | Investigative research |
 | **social** | Social interactions | Engagement tracking |

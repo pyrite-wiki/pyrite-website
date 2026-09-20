@@ -7,18 +7,29 @@ section: get-started
 
 ## Install
 
+There is no PyPI wheel yet — install from a source checkout:
+
 ```bash
 git clone https://github.com/markramm/pyrite.git
 cd pyrite
-pip install ".[all]"           # Core + AI + semantic search + dev tools
+pip install -e ".[all]"        # Core + AI + semantic search + dev tools
 ```
 
 Or install only the extras you need:
 
 ```bash
-pip install ".[ai]"            # OpenAI + Anthropic + Gemini SDKs
-pip install ".[semantic]"      # sentence-transformers + sqlite-vec
-pip install .                  # Core only
+pip install -e ".[server]"     # REST API server
+pip install -e ".[cli]"        # Typer + Rich CLI
+pip install -e ".[ai]"         # OpenAI + Anthropic SDKs
+pip install -e ".[semantic]"   # sentence-transformers + sqlite-vec
+pip install -e ".[postgres]"   # Postgres + pgvector backend
+pip install -e .               # Core only
+```
+
+Docker works too, and serves the web UI on port 8088:
+
+```bash
+docker compose up -d
 ```
 
 ## Create a knowledge base
@@ -28,7 +39,9 @@ pyrite init --template research --path my-kb
 cd my-kb
 ```
 
-Templates available: `research`, `software`, `zettelkasten`, `empty`, and more.
+Templates available: `research`, `software`, `zettelkasten`, `intellectual-biography`, `movement`, `empty`.
+
+`pyrite init` does not run `git init` for you. If you want every change versioned from the start, initialize git yourself.
 
 ## Add some entries
 
@@ -47,6 +60,9 @@ pyrite create -k my-kb --type note --title "Switch to async standups" \
 pyrite search "career transition" -k my-kb
 
 # Semantic search (finds conceptually related content)
+# The first semantic search downloads the embedding model (~90 MB, one time).
+# Entries embed in the background, so run `pyrite index embed` first if you
+# just created them.
 pyrite search "team decisions" -k my-kb --mode=semantic
 
 # Hybrid (both at once)
@@ -55,18 +71,20 @@ pyrite search "team decisions" -k my-kb --mode=hybrid
 
 ## Connect to Claude Desktop or Claude Code
 
-Add to your MCP configuration:
+Run `pyrite mcp-setup` to write the config for you, or add it by hand:
 
 ```json
 {
   "mcpServers": {
     "pyrite": {
-      "command": "pyrite",
+      "command": "/absolute/path/to/.venv/bin/pyrite",
       "args": ["mcp"]
     }
   }
 }
 ```
+
+Use the absolute path (`which pyrite`) — Claude Desktop does not see your shell's PATH or an activated venv.
 
 Now any AI that speaks MCP can search, read, and write your knowledge base.
 
