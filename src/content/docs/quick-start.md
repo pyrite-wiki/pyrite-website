@@ -61,6 +61,8 @@ pyrite search "career transition" -k my-kb
 
 # Semantic search (finds conceptually related content)
 # The first semantic search downloads the embedding model (~90 MB, one time).
+# Entries embed in the background, so run `pyrite index embed` first if you
+# just created them.
 pyrite search "team decisions" -k my-kb --mode=semantic
 
 # Hybrid (both at once)

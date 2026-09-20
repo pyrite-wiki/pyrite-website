@@ -1,5 +1,5 @@
 ---
-import { release } from "../data/release";
+import { release, community } from "../data/release";
 ---
 
 <div class="px-6 pt-6 max-w-4xl mx-auto">
@@ -12,21 +12,26 @@ import { release } from "../data/release";
         class="font-mono text-xs px-2 py-0.5 rounded bg-pyrite-500/15 text-pyrite-400"
         >v{release.version}</span
       >
+      <span class="text-sm font-semibold text-text-primary">
+        Pyrite is a community project now
+      </span>
+      <span class="text-text-muted text-xs ml-auto">Release notes →</span>
+    </div>
+    <p class="text-text-secondary text-sm mt-2 leading-relaxed">
+      {release.headline}
+    </p>
+    <p class="text-text-muted text-xs mt-2 leading-relaxed">
+      {community.outsidePrs} of {community.mergedPrs} merged pull requests came from
+      outside contributors, and {community.openPrsFromContributors} of the {community.openPrs}
+      still open are theirs.
       {
         release.security && (
-          <span class="text-sm font-semibold text-text-primary">
-            Security release — upgrade recommended
+          <span class="text-text-secondary">
+            {" "}
+            Includes a security fix: {release.securityNote}
           </span>
         )
       }
-      <span class="text-text-muted text-xs ml-auto">Release notes →</span>
-    </div>
-    {
-      release.security && (
-        <p class="text-text-secondary text-sm mt-2 leading-relaxed">
-          {release.securityNote}
-        </p>
-      )
-    }
+    </p>
   </a>
 </div>

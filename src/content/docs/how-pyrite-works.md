@@ -74,7 +74,9 @@ Pyrite supports three search modes:
 | **semantic** | Vector similarity via sentence-transformers | Conceptual queries, "things like X" |
 | **hybrid** | Both, with reciprocal rank fusion | General-purpose — best of both |
 
-Keyword search works out of the box. Semantic search requires installing the semantic extra (`pip install -e ".[semantic]"` from the repo) and a one-time embedding step (`pyrite index embed`).
+Keyword search works out of the box. Semantic search requires the semantic extra (`pip install -e ".[semantic]"` from the repo).
+
+With `auto_embed` on (the default, disable with `PYRITE_AUTO_EMBED=0`), writes queue their own embedding rather than blocking on it: an entry is keyword-searchable the moment it is written, and becomes findable by meaning once a drain runs. Drains happen on `pyrite index embed`, `index sync`, `index build` and at every `pyrite-server` startup. **Semantic search is therefore eventually consistent** — an entry written a moment ago may not match a semantic query yet, and a semantic search against a KB with no embeddings says so in its warnings instead of returning a silent empty list.
 
 ## Typed entries
 

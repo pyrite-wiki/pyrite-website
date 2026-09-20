@@ -13,11 +13,14 @@ Each tier includes the tools from lower tiers.
 
 | Tier | Tools |
 |------|-------|
-| **read** (29) | `kb_list`, `kb_search`, `kb_get`, `kb_timeline`, `kb_tags`, `kb_backlinks`, `kb_stats`, `kb_schema`, `kb_orient`, `kb_batch_read`, `kb_batch_suggest`, `kb_discover_neighbors`, `kb_list_entries`, `kb_recent`, `kb_qa_validate`, `kb_qa_status`, `kb_read_body`, `kb_find_by_status`, `kb_find_by_assignee`, `kb_find_by_location`, `kb_find_overdue`, `kb_index_job_status`, `list_edge_types`, `task_list`, `task_status`, `task_ancestors`, `task_blocked_by`, `task_critical_path`, `task_subtree` |
-| **write** (+11) | read + `kb_create`, `kb_bulk_create`, `kb_update`, `kb_delete`, `kb_link`, `kb_qa_assess`, `task_create`, `task_update`, `task_claim`, `task_checkpoint`, `task_decompose` |
-| **admin** (+8) | write + `kb_index_sync`, `kb_manage`, `kb_commit`, `kb_push`, `kb_registry_add`, `kb_registry_remove`, `kb_registry_reindex`, `kb_registry_health` |
+| **read** (70) | `kb_list`, `kb_search`, `kb_get`, `kb_timeline`, `kb_tags`, `kb_backlinks`, `kb_stats`, `kb_schema`, `kb_orient`, `kb_batch_read`, `kb_batch_suggest`, `kb_discover_neighbors`, `kb_list_entries`, `kb_recent`, `kb_qa_validate`, `kb_qa_status`, `kb_read_body`, `kb_find_by_status`, `kb_find_by_assignee`, `kb_find_by_location`, `kb_find_overdue`, `kb_index_job_status`, `list_edge_types`, `task_list`, `task_status`, `task_ancestors`, `task_blocked_by`, `task_critical_path`, `task_subtree` |
+| **write** (+33) | read + `kb_create`, `kb_bulk_create`, `kb_update`, `kb_delete`, `kb_link`, `kb_qa_assess`, `task_create`, `task_update`, `task_claim`, `task_checkpoint`, `task_decompose` |
+| **admin** (+9) | write + `kb_index_sync`, `kb_manage`, `kb_commit`, `kb_push`, `kb_registry_add`, `kb_registry_remove`, `kb_registry_reindex`, `kb_registry_health` |
 
-48 tools at the admin tier.
+112 tools at the admin tier. The tables above name the **core** tools; each
+tier also exposes the plugin tools registered for it, which is most of the
+count. `pyrite mcp --help` generates the exact totals from the live registry —
+trust it over any number typed into a doc.
 
 ## Starting the server
 
@@ -44,7 +47,23 @@ pyrite mcp --tier write
 
 Refused calls return stable error codes (`VALIDATION_FAILED`, `NOT_FOUND`, `READ_ONLY`) with `retryable: false`, so an agent does not retry a call that cannot succeed.
 
-All paginated tools support `limit`/`offset` params and return a `has_more` flag. Search results return snippets by default — use `include_body` for full text, `fields` for projection.
+Paginated tools take `limit`/`offset`, but pagination metadata is **not**
+uniform across surfaces — whether a given tool returns `has_more` or `total`
+varies by tool and by transport (CLI, MCP, REST). See `docs/json-contracts.md`
+in the repo for the measured per-surface table rather than assuming a flag is
+present.
+
+Search results return snippets by default — use `include_body` for full text
+and `fields` for projection. Reads are **bounded by default**: a single body is
+capped at 20,000 characters and a multi-entry response at 40,000 total. `fields`
+cannot defeat the cap. An entry reached after the budget is spent comes back in
+place with an empty body, `body_truncated: true` and its true `body_length` —
+never dropped, never reported missing — and `kb_read_body` retrieves the rest.
+The limits are tunable via `PYRITE_BODY_CHUNK_DEFAULT`, `PYRITE_BODY_CHUNK_MAX`
+and `PYRITE_BODY_RESPONSE_BUDGET`.
+
+Writes refuse a body marked `body_truncated: true`, so an agent that read a
+long entry in chunks cannot silently destroy it by writing the fragment back.
 
 ## Prompts and resources
 
