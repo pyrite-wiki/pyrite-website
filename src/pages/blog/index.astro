@@ -1,0 +1,56 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+const posts = (await getCollection("blog"))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const fmt = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "UTC",
+});
+---
+
+<Base
+  title="Blog — Pyrite"
+  description="Notes on building Pyrite: knowledge-as-code for humans and AI agents."
+>
+  <section class="px-6 py-16 max-w-3xl mx-auto">
+    <header class="mb-12">
+      <h1 class="text-4xl font-bold mb-3">Blog</h1>
+      <p class="text-text-secondary text-lg">
+        Notes on building a knowledge base that agents and people share.
+      </p>
+    </header>
+
+    {
+      posts.length === 0 ? (
+        <p class="text-text-muted">No posts yet.</p>
+      ) : (
+        <ul class="space-y-10">
+          {posts.map((post) => (
+            <li>
+              <a href={`/blog/${post.id.replace(/\.md$/, "")}`} class="group block">
+                <time
+                  datetime={post.data.date.toISOString()}
+                  class="text-xs text-text-muted font-mono"
+                >
+                  {fmt.format(post.data.date)}
+                </time>
+                <h2 class="text-xl font-semibold mt-1 mb-2 group-hover:text-pyrite-400 transition-colors">
+                  {post.data.title}
+                </h2>
+                <p class="text-text-secondary leading-relaxed">
+                  {post.data.description}
+                </p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</Base>
