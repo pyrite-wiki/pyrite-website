@@ -76,14 +76,14 @@ pyrite schema migrate --kb=research
 
 ```bash
 # Self-host on a VPS
-git clone https://github.com/markramm/pyrite.git && cd pyrite
+git clone https://github.com/pyrite-wiki/pyrite.git && cd pyrite
 bash deploy/selfhost/setup.sh kb.example.com
 ```
 
 ## Install extras
 
 ```bash
-git clone https://github.com/markramm/pyrite.git
+git clone https://github.com/pyrite-wiki/pyrite.git
 cd pyrite
 pip install -e .                  # Core
 pip install -e ".[all]"           # Everything

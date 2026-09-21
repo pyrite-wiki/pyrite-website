@@ -10,7 +10,7 @@ section: get-started
 There is no PyPI wheel yet — install from a source checkout:
 
 ```bash
-git clone https://github.com/markramm/pyrite.git
+git clone https://github.com/pyrite-wiki/pyrite.git
 cd pyrite
 pip install -e ".[all]"        # Core + AI + semantic search + dev tools
 ```

@@ -18,7 +18,7 @@
 export const release = {
   version: "0.24.3",
   date: "2026-09-20",
-  url: "https://github.com/markramm/pyrite/releases/tag/v0.24.3",
+  url: "https://github.com/pyrite-wiki/pyrite/releases/tag/v0.24.3",
   /** Set true when a release carries fixes users should upgrade for. */
   security: true,
   securityNote:
