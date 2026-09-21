@@ -128,7 +128,7 @@ reduces output never disables another bound.** That came straight from a
 finding where passing both `fields` and `body_limit` — two token-reduction
 parameters — returned 171,189 characters, 28× the explicit cap, and blew the
 client's tool-output ceiling. It is written down as
-[ADR-0034](https://github.com/markramm/pyrite/blob/main/kb/adrs/0034-agent-facing-reads-are-bounded-by-default.md)
+[ADR-0034](https://github.com/pyrite-wiki/pyrite/blob/main/kb/adrs/0034-agent-facing-reads-are-bounded-by-default.md)
 now, because the rule had existed in the code unwritten, which is precisely why
 it had never been applied uniformly.
 
@@ -201,7 +201,7 @@ they noticed.
 ---
 
 *The full reports are in the repo:
-[CLI](https://github.com/markramm/pyrite/blob/main/tests/usability/cli-hallway-report-2026-09-18.md)
+[CLI](https://github.com/pyrite-wiki/pyrite/blob/main/tests/usability/cli-hallway-report-2026-09-18.md)
 and
-[MCP read tier](https://github.com/markramm/pyrite/blob/main/kb/notes/hallway-test-read-tier-mcp-2026-09-18.md).
+[MCP read tier](https://github.com/pyrite-wiki/pyrite/blob/main/kb/notes/hallway-test-read-tier-mcp-2026-09-18.md).
 Both are published as-is, verbatim errors included.*

@@ -10,7 +10,7 @@ section: get-started
 Run your own Pyrite instance on any VPS ($6/month, unlimited users, you own your data):
 
 ```bash
-git clone https://github.com/markramm/pyrite.git && cd pyrite
+git clone https://github.com/pyrite-wiki/pyrite.git && cd pyrite
 bash deploy/selfhost/setup.sh kb.example.com
 ```
 
