@@ -7,6 +7,9 @@ section: reference
 
 All commands support `--format json` for agent consumption. `pyrite --version` (or `-V`) prints the installed version.
 
+A command prints its result and nothing else. Add `-v` (INFO) or `-vv` (DEBUG)
+anywhere on the command line for log lines, or set `PYRITE_LOG_LEVEL`.
+
 ## Search
 
 ```bash
@@ -44,6 +47,19 @@ pyrite create --kb=research --type=person --title="Jane Doe" \
   --body="Senior policy advisor." --tags="policy,doj"
 ```
 
+## Tasks
+
+```bash
+pyrite task create -k research --title "Check the 2024 filings"
+pyrite task list -k research
+pyrite task claim <task-id> -k research -a agent:claude   # atomic: parallel agents never take the same task
+pyrite task update <task-id> -k research --status review
+pyrite task get <task-id>
+```
+
+The `task` commands print JSON by default. Pass `--format rich`, or set
+`PYRITE_FORMAT=rich`, for text.
+
 ## Admin
 
 ```bash
@@ -60,6 +76,13 @@ pyrite index embed
 
 # Auto-discover KBs by kb.yaml presence
 pyrite kb discover
+
+# Files with no id: line, and the id each has today (from its title)
+pyrite ids missing -k research
+
+# Pin those ids into the files, changing no other byte
+pyrite ids pin -k research --dry-run
+pyrite ids pin -k research
 ```
 
 ## Schema management
@@ -75,7 +98,7 @@ pyrite schema migrate --kb=research
 ## Deploy
 
 ```bash
-# Self-host on a VPS
+# Self-host on a VPS (multi-user is experimental — see /docs/status)
 git clone https://github.com/pyrite-wiki/pyrite.git && cd pyrite
 bash deploy/selfhost/setup.sh kb.example.com
 ```

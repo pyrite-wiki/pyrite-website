@@ -1,0 +1,83 @@
+---
+import Base from "../layouts/Base.astro";
+import { community, release } from "../data/release";
+---
+
+<Base
+  title="Community — Pyrite"
+  description={`${community.people} people have code in Pyrite ${release.version}. Here is who they are and how to join them.`}
+>
+  <section class="px-6 py-20 max-w-4xl mx-auto">
+    <h1 class="text-4xl font-bold mb-4">Community</h1>
+    <p class="text-text-secondary text-lg mb-6 leading-relaxed">
+      When v{community.previousVersion} shipped in September, {community.outsideContributorsAtPrevious}
+      people outside the maintainer had ever landed a change in Pyrite. By
+      v{release.version}, {community.outsideContributors} have — {community.people}
+      people in all, with {community.outsidePrs} of the {community.mergedPrs} pull
+      requests ever merged coming from contributors, and {community.openPrsFromContributors}
+      of the {community.openPrs} open right now.
+    </p>
+    <p class="text-text-secondary mb-12 leading-relaxed">
+      Their work runs from documentation fixes to storage, search and MCP fixes
+      and new test coverage. The 0.25 security releases carried contributor
+      fixes alongside the maintainer's own.
+    </p>
+
+    <h2 class="text-2xl font-bold mb-6">Contributors</h2>
+    <ul class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
+      {
+        community.contributors.map((login) => (
+          <li>
+            <a
+              href={`https://github.com/${login}`}
+              class="block rounded-lg bg-surface-raised border border-white/5 px-4 py-2 font-mono text-sm text-text-secondary hover:text-text-primary hover:border-white/20 transition-colors truncate"
+            >
+              @{login}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="text-text-muted text-sm mb-16">
+      Plus the maintainer,
+      <a href="https://github.com/markramm" class="underline hover:text-text-secondary"
+        >@markramm</a
+      >. Counted from GitHub's contributor list, commit authors and co-author
+      credits, with anyone who commits under two names counted once. Missing
+      from the list? Open an issue on this site's repo.
+    </p>
+
+    <h2 class="text-2xl font-bold mb-4">Join in</h2>
+    <div class="grid sm:grid-cols-3 gap-6">
+      <a
+        href="https://github.com/pyrite-wiki/pyrite/blob/main/CONTRIBUTING.md"
+        class="block p-6 rounded-xl bg-surface-raised border border-white/5 hover:border-white/20 transition-colors"
+      >
+        <div class="font-semibold mb-2">Read CONTRIBUTING</div>
+        <p class="text-text-secondary text-sm leading-relaxed">
+          Setup, tests, how changes are reviewed, and the changelog fragment
+          every pull request carries.
+        </p>
+      </a>
+      <a
+        href="https://github.com/pyrite-wiki/pyrite/issues"
+        class="block p-6 rounded-xl bg-surface-raised border border-white/5 hover:border-white/20 transition-colors"
+      >
+        <div class="font-semibold mb-2">Pick up an issue</div>
+        <p class="text-text-secondary text-sm leading-relaxed">
+          Bugs, docs that don't match the code, and roadmap work, all on GitHub.
+        </p>
+      </a>
+      <a
+        href="https://github.com/pyrite-wiki/pyrite/blob/main/SECURITY.md"
+        class="block p-6 rounded-xl bg-surface-raised border border-white/5 hover:border-white/20 transition-colors"
+      >
+        <div class="font-semibold mb-2">Report a vulnerability</div>
+        <p class="text-text-secondary text-sm leading-relaxed">
+          Privately, through SECURITY.md. Multi-user hardening is where help
+          matters most right now.
+        </p>
+      </a>
+    </div>
+  </section>
+</Base>

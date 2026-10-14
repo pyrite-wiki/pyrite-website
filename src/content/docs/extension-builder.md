@@ -269,8 +269,10 @@ Six extensions ship with Pyrite:
 | Extension | Types | Purpose |
 |-----------|-------|---------|
 | **software-kb** | ADRs, components, backlog, standards | Software project management |
-| **zettelkasten** | Notes with maturity levels | CEQRC knowledge workflow |
-| **encyclopedia** | Articles, reviews | Collaborative knowledge |
+| **zettelkasten** *(example plugin)* | Notes with maturity levels | CEQRC knowledge workflow |
+| **encyclopedia** *(example plugin)* | Articles, reviews | Collaborative knowledge |
 | **cascade** | Timeline events, actors | Chronological research |
-| **journalism-investigation** | Sources, claims, evidence chains | Investigative research |
-| **social** | Social interactions | Engagement tracking |
+| **journalism-investigation** *(experimental)* | Sources, claims, evidence chains | Investigative research |
+| **social** *(example plugin)* | Social interactions | Engagement tracking |
+
+The example plugins are the best place to start reading when you build your own.

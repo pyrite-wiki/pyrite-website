@@ -1,0 +1,43 @@
+---
+import { community } from "../data/release";
+---
+
+<section class="px-6 py-20 max-w-4xl mx-auto">
+  <h2 class="text-3xl font-bold text-center mb-4">Built in the open</h2>
+  <p class="text-text-secondary text-center mb-10 max-w-2xl mx-auto">
+    When v{community.previousVersion} shipped in September, {community.outsideContributorsAtPrevious + 1}
+    people had code in Pyrite. Three weeks later, {community.people} do.
+  </p>
+
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 text-center mb-10">
+    <div>
+      <div class="text-2xl font-bold text-pyrite-400">{community.people}</div>
+      <div class="text-text-secondary text-sm">Contributors</div>
+    </div>
+    <div>
+      <div class="text-2xl font-bold text-pyrite-400">
+        {community.outsideContributorsAtPrevious + 1}
+      </div>
+      <div class="text-text-secondary text-sm">At v{community.previousVersion}</div>
+    </div>
+    <div>
+      <div class="text-2xl font-bold text-pyrite-400">{community.outsidePrs}</div>
+      <div class="text-text-secondary text-sm">Merged PRs from contributors</div>
+    </div>
+    <div>
+      <div class="text-2xl font-bold text-pyrite-400">
+        {community.openPrsFromContributors}
+      </div>
+      <div class="text-text-secondary text-sm">Contributor PRs open now</div>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <a
+      href="/community"
+      class="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-white/20 text-sm font-semibold hover:border-white/40 transition-colors"
+    >
+      Meet the contributors
+    </a>
+  </div>
+</section>

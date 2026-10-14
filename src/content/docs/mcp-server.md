@@ -13,8 +13,8 @@ Each tier includes the tools from lower tiers.
 
 | Tier | Tools |
 |------|-------|
-| **read** (70) | `kb_list`, `kb_search`, `kb_get`, `kb_timeline`, `kb_tags`, `kb_backlinks`, `kb_stats`, `kb_schema`, `kb_orient`, `kb_batch_read`, `kb_batch_suggest`, `kb_discover_neighbors`, `kb_list_entries`, `kb_recent`, `kb_qa_validate`, `kb_qa_status`, `kb_read_body`, `kb_find_by_status`, `kb_find_by_assignee`, `kb_find_by_location`, `kb_find_overdue`, `kb_index_job_status`, `list_edge_types`, `task_list`, `task_status`, `task_ancestors`, `task_blocked_by`, `task_critical_path`, `task_subtree` |
-| **write** (+33) | read + `kb_create`, `kb_bulk_create`, `kb_update`, `kb_delete`, `kb_link`, `kb_qa_assess`, `task_create`, `task_update`, `task_claim`, `task_checkpoint`, `task_decompose` |
+| **read** (72) | `kb_list`, `kb_search`, `kb_get`, `kb_timeline`, `kb_tags`, `kb_backlinks`, `kb_stats`, `kb_schema`, `kb_orient`, `kb_batch_read`, `kb_batch_suggest`, `kb_discover_neighbors`, `kb_list_entries`, `kb_recent`, `kb_qa_validate`, `kb_qa_status`, `kb_read_body`, `kb_find_by_status`, `kb_find_by_assignee`, `kb_find_by_location`, `kb_find_overdue`, `kb_index_job_status`, `list_edge_types`, `task_list`, `task_status`, `task_ancestors`, `task_blocked_by`, `task_critical_path`, `task_subtree` |
+| **write** (+31) | read + `kb_create`, `kb_bulk_create`, `kb_update`, `kb_delete`, `kb_link`, `kb_qa_assess`, `task_create`, `task_update`, `task_claim`, `task_checkpoint`, `task_decompose` |
 | **admin** (+9) | write + `kb_index_sync`, `kb_manage`, `kb_commit`, `kb_push`, `kb_registry_add`, `kb_registry_remove`, `kb_registry_reindex`, `kb_registry_health` |
 
 112 tools at the admin tier. The tables above name the **core** tools; each
@@ -25,27 +25,35 @@ trust it over any number typed into a doc.
 ## Starting the server
 
 ```bash
-# Full access (default)
+# Read and write (the default)
 pyrite mcp
 
 # Read-only (safe for untrusted agents)
 pyrite mcp --tier read
 
-# Write access (no admin tools)
-pyrite mcp --tier write
+# Everything, including git and KB registry tools — keep this for yourself
+pyrite mcp --tier admin
 ```
+
+`pyrite-admin mcp`, `pyrite-mcp serve` and `python -m pyrite.server.mcp_server`
+default to the write tier too. A hand-written config that ran `pyrite-admin mcp`
+with no `--tier` and relied on the admin tools must add `"--tier", "admin"`.
+
+To connect Claude Code and Claude Desktop, run `pyrite mcp-setup` (write tier;
+`--tier read|admin`, `--client`, `--project`). It writes the config each client
+actually reads and reports what it changed.
 
 ## Key tools
 
 - **`kb_search`** — keyword, semantic, or hybrid search with pagination and field projection
-- **`kb_orient`** — one-shot KB summary for agent onboarding (types, stats, recent activity)
+- **`kb_orient`** — one-shot KB summary for agent onboarding (types, stats, recent activity), built to be an agent's first call
 - **`kb_batch_read`** — fetch multiple entries in a single call
 - **`kb_bulk_create`** — create up to 50 entries per call with best-effort semantics
 - **`kb_schema`** — inspect type definitions, field schemas, and validation rules
 - **`task_claim`** — atomically claim a task, so parallel agents never take the same work
 - **`task_decompose`** / **`task_critical_path`** — break work down and query the dependency DAG
 
-Refused calls return stable error codes (`VALIDATION_FAILED`, `NOT_FOUND`, `READ_ONLY`) with `retryable: false`, so an agent does not retry a call that cannot succeed.
+Refused calls return stable error codes (`VALIDATION_FAILED`, `NOT_FOUND`, `KB_NOT_FOUND`, `READ_ONLY`) with `retryable: false`, so an agent does not retry a call that cannot succeed. A KB name that is not a KB, or that the caller may not read, answers `KB_NOT_FOUND` — the same code REST and the CLI use.
 
 Paginated tools take `limit`/`offset`, but pagination metadata is **not**
 uniform across surfaces — whether a given tool returns `has_more` or `total`

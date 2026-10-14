@@ -22,15 +22,20 @@ pip install -e ".[server]"     # REST API server
 pip install -e ".[cli]"        # Typer + Rich CLI
 pip install -e ".[ai]"         # OpenAI + Anthropic SDKs
 pip install -e ".[semantic]"   # sentence-transformers + sqlite-vec
-pip install -e ".[postgres]"   # Postgres + pgvector backend
+pip install -e ".[postgres]"   # Postgres + pgvector backend (experimental; not in [all])
 pip install -e .               # Core only
 ```
 
-Docker works too, and serves the web UI on port 8088:
+Docker works too, and serves the web UI at `http://localhost:8088`:
 
 ```bash
 docker compose up -d
 ```
+
+The compose file publishes on `127.0.0.1` only and runs with no credential, so
+only this machine can reach it. Turn on auth before you expose it to anyone
+else — and read [What's Supported](/docs/status) first: multi-user is
+experimental.
 
 ## Create a knowledge base
 
@@ -71,7 +76,16 @@ pyrite search "team decisions" -k my-kb --mode=hybrid
 
 ## Connect to Claude Desktop or Claude Code
 
-Run `pyrite mcp-setup` to write the config for you, or add it by hand:
+```bash
+pyrite mcp-setup
+```
+
+This points a `pyrite` server entry at this install in every client it finds —
+Claude Code (user scope, or `./.mcp.json` with `--project`) and Claude
+Desktop — at the write tier (`--tier read` or `--tier admin` to choose), and
+prints a JSON report of what it changed. Restart the client afterwards.
+
+For any other MCP client, add it by hand:
 
 ```json
 {
@@ -87,6 +101,9 @@ Run `pyrite mcp-setup` to write the config for you, or add it by hand:
 Use the absolute path (`which pyrite`) — Claude Desktop does not see your shell's PATH or an activated venv.
 
 Now any AI that speaks MCP can search, read, and write your knowledge base.
+
+For a longer walk-through, [Pyrite in 20 minutes](https://github.com/pyrite-wiki/pyrite/blob/main/docs/tutorials/pyrite-in-20-minutes.md)
+goes from nothing to an agent-written research KB. CI runs it as a test.
 
 ## What just happened
 

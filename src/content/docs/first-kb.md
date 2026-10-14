@@ -68,7 +68,7 @@ pyrite get sarah-chen -k my-brain
 
 ## Connect to Claude
 
-Run `pyrite mcp-setup` to add Pyrite's MCP server to your Claude configuration, or add it by hand:
+Run `pyrite mcp-setup` to add Pyrite's MCP server to Claude Code and Claude Desktop (write tier by default), or add it by hand to any other client:
 
 ```json
 {
@@ -131,4 +131,4 @@ The SQLite index (`.pyrite/index.db`) is derived — delete it and rebuild with 
 - [How Pyrite Works](/docs/how-pyrite-works) — understand the architecture
 - [Custom Types](/docs/custom-types) — define your own entry types
 - [MCP Server](/docs/mcp-server) — configure access tiers for AI agents
-- [Deploy](/docs/deploy) — run Pyrite on a VPS for your team
+- [Deploy](/docs/deploy) — run Pyrite on a VPS (multi-user is [experimental](/docs/status))

@@ -37,6 +37,18 @@ ls extensions/
 
 Update `counts` in `src/data/release.ts` if any changed.
 
+## 2a. Re-check `status` and `community`
+
+`status` lists what the project supports and what it marks experimental. It
+moves: re-read the README's warnings, SECURITY.md and the CHANGELOG, and
+`git grep -i experimental <tag> -- README.md SECURITY.md docs`.
+
+`community` is measured, not asserted. Count merged and open PRs with
+`gh pr list`, and contributors from GitHub's contributor list plus commit
+authors and `Co-authored-by:` trailers — several people commit under two names,
+so map each email to one GitHub login before counting. Set `previousVersion`
+and `outsideContributorsAtPrevious` to the release you are comparing against.
+
 ## 3. Check what the release renamed or moved
 
 Renames are what break docs. Read the CHANGELOG's **Changed** section and grep

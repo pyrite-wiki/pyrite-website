@@ -4,41 +4,58 @@ import Base from "../layouts/Base.astro";
 const extensions = [
   {
     name: "software-kb",
+    status: "supported",
     purpose: "Software project management",
     types: "ADRs, components, backlog items, standards, runbooks",
     tools: "sw_adrs, sw_backlog, sw_new_adr, sw_components, sw_standards",
   },
   {
     name: "zettelkasten",
+    status: "example",
     purpose: "CEQRC maturity workflow",
     types: "Notes with maturity progression (capture → elaborate → question → refine → connect)",
     tools: "Maturity promotion, reading list management",
   },
   {
     name: "encyclopedia",
+    status: "example",
     purpose: "Articles with review workflow",
     types: "Articles, reviews, community voting",
     tools: "Article review, voting, quality scoring",
   },
   {
     name: "cascade",
+    status: "supported",
     purpose: "Timeline research & investigations",
     types: "Timeline events, actors, capture lanes",
     tools: "Timeline tools, capture lane validation",
   },
   {
     name: "social",
+    status: "example",
     purpose: "Engagement tracking",
     types: "Social interactions, engagement metrics",
     tools: "Engagement tracking tools",
   },
   {
     name: "journalism-investigation",
+    status: "experimental",
     purpose: "Investigative research",
     types: "Sources, claims, actors, evidence chains",
     tools: "Investigation setup, cross-KB source and claim search",
   },
 ];
+
+const statusLabel: Record<string, string> = {
+  supported: "supported",
+  example: "example plugin",
+  experimental: "experimental",
+};
+const statusStyle: Record<string, string> = {
+  supported: "bg-emerald-500/10 text-emerald-400",
+  example: "bg-white/5 text-text-muted",
+  experimental: "bg-amber-500/10 text-amber-400",
+};
 ---
 
 <Base
@@ -47,10 +64,16 @@ const extensions = [
 >
   <section class="px-6 py-20 max-w-4xl mx-auto">
     <h1 class="text-4xl font-bold mb-4">Plugins</h1>
-    <p class="text-text-secondary text-lg mb-12">
+    <p class="text-text-secondary text-lg mb-6">
       Pyrite's plugin protocol lets extensions add custom entry types, MCP
       tools, CLI commands, validators, lifecycle hooks, and relationship
       semantics. Six extensions ship out of the box.
+    </p>
+    <p class="text-text-secondary mb-12">
+      Two are supported products. Three are example plugins — reference code
+      showing how a plugin adds entry types, CLI commands, MCP tools and a
+      preset. journalism-investigation is experimental: its MCP tools are
+      unsupported until the 0.28 plugin/API contract.
     </p>
     <p class="text-text-secondary mb-12">
       Task management used to live here as an extension. It is now built in:
@@ -68,6 +91,9 @@ const extensions = [
                 {ext.name}
               </span>
               <span class="text-text-muted text-sm">— {ext.purpose}</span>
+              <span class={`ml-auto text-xs font-mono px-2 py-0.5 rounded ${statusStyle[ext.status]}`}>
+                {statusLabel[ext.status]}
+              </span>
             </div>
             <div class="grid sm:grid-cols-2 gap-4 text-sm">
               <div>

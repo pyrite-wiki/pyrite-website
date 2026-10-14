@@ -86,7 +86,7 @@ Every entry has a `type` field in its frontmatter. Types define:
 - **AI instructions** — guidance for agents creating entries of that type
 - **Subdirectories** — where files of that type live
 
-Ten types ship built-in (`note`, `person`, `organization`, `event`, `document`, `topic`, `relationship`, `timeline`, `collection`, `qa_assessment`). You can define custom types in `kb.yaml` or via plugins.
+Eleven types ship built-in (`note`, `person`, `organization`, `event`, `document`, `topic`, `relationship`, `timeline`, `collection`, `qa_assessment`, `task`). You can define custom types in `kb.yaml` or via plugins.
 
 ## Multi-KB architecture
 

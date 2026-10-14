@@ -21,14 +21,15 @@ import { release, community } from "../data/release";
       {release.headline}
     </p>
     <p class="text-text-muted text-xs mt-2 leading-relaxed">
-      {community.outsidePrs} of {community.mergedPrs} merged pull requests came from
-      outside contributors, and {community.openPrsFromContributors} of the {community.openPrs}
-      still open are theirs.
+      {community.people} people have code in this release, up from
+      {community.outsideContributorsAtPrevious + 1} at v{community.previousVersion}, and
+      {community.openPrsFromContributors} of the {community.openPrs} open pull
+      requests are from contributors.
       {
         release.security && (
           <span class="text-text-secondary">
             {" "}
-            Includes a security fix: {release.securityNote}
+            Upgrade note: {release.securityNote}
           </span>
         )
       }
