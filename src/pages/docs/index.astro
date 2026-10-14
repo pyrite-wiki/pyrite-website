@@ -51,7 +51,7 @@ const sections = [
         const sectionDocs = sorted.filter((d) => d.data.section === key);
         const firstDoc = sectionDocs[0];
         return (
-          <div class="rounded-xl bg-surface-raised border border-white/5 p-6 hover:border-white/15 transition-colors">
+          <div class="rounded-xl bg-surface-raised border border-line p-6 hover:border-white/15 transition-colors">
             <div class="flex items-start gap-4">
               <div class="shrink-0 p-2 rounded-lg bg-pyrite-500/10">
                 <svg class="w-5 h-5 text-pyrite-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,7 +86,7 @@ const sections = [
       })}
     </div>
 
-    <div class="mt-12 p-6 rounded-xl bg-surface-raised border border-white/5">
+    <div class="mt-12 p-6 rounded-xl bg-surface-raised border border-line">
       <p class="text-text-secondary text-sm">
         Pyrite's own documentation is managed as a Pyrite knowledge base.
         Browse the full KB on the <a href="https://demo.pyrite.wiki" class="text-pyrite-400 hover:underline">demo site</a>,

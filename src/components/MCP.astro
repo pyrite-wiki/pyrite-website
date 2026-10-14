@@ -1,79 +1,97 @@
 ---
 import { counts } from "../data/release";
+
+const pct = (n: number) => `${Math.round((n / counts.mcpAdmin) * 100)}%`;
+
+/** [indent, highlighted key, rest of line] */
+const config: [number, string, string][] = [
+  [0, "", "{"],
+  [2, '"mcpServers"', ": {"],
+  [4, '"pyrite"', ": {"],
+  [6, '"command"', ': "/path/to/.venv/bin/pyrite",'],
+  [6, '"args"', ': ["mcp"]'],
+  [4, "", "}"],
+  [2, "", "}"],
+  [0, "", "}"],
+];
+
+const tiers = [
+  {
+    name: "read",
+    title: "Search, browse, explore, query tasks",
+    tools: counts.mcpRead,
+    note: "Safe for untrusted agents. Includes plugin tools.",
+  },
+  {
+    name: "write",
+    title: "Create, update, delete, link, drive tasks",
+    tools: counts.mcpWrite,
+    note: `For your own agents. Adds ${counts.mcpWriteAdds} tools to read.`,
+  },
+  {
+    name: "admin",
+    title: "Index, git operations, KB registry",
+    tools: counts.mcpAdmin,
+    note: `For you. Adds ${counts.mcpAdminAdds} tools to write.`,
+  },
+];
 ---
 
-<section class="px-6 py-20 max-w-4xl mx-auto">
-  <h2 class="text-3xl font-bold text-center mb-4">
-    First-class AI integration
-  </h2>
-  <p class="text-text-secondary text-center mb-12 max-w-2xl mx-auto">
-    Pyrite speaks MCP natively. Connect Claude Desktop, Claude Code, Cursor, or
-    any MCP-compatible AI — your knowledge base becomes persistent agent memory.
-  </p>
-
-  <div class="grid sm:grid-cols-2 gap-8">
-    <div>
-      <h3 class="font-semibold mb-3">Three-tier access control</h3>
-      <div class="space-y-2 text-sm">
-        <div class="flex items-start gap-3">
-          <span
-            class="inline-block px-2 py-0.5 rounded text-xs font-mono bg-emerald-500/10 text-emerald-400 shrink-0"
-            >read</span
-          >
-          <span class="text-text-secondary"
-            >Search, browse, explore, query tasks — {counts.mcpRead} tools, plugin
-            tools included. Safe for untrusted agents.</span
-          >
-        </div>
-        <div class="flex items-start gap-3">
-          <span
-            class="inline-block px-2 py-0.5 rounded text-xs font-mono bg-amber-500/10 text-amber-400 shrink-0"
-            >write</span
-          >
-          <span class="text-text-secondary"
-            >Create, update, delete, link entries, drive tasks — +{counts.mcpWriteAdds} tools,
-            {counts.mcpWrite} in all. For your own agents.</span
-          >
-        </div>
-        <div class="flex items-start gap-3">
-          <span
-            class="inline-block px-2 py-0.5 rounded text-xs font-mono bg-red-500/10 text-red-400 shrink-0"
-            >admin</span
-          >
-          <span class="text-text-secondary"
-            >Index management, git operations, KB registry — +{counts.mcpAdminAdds} tools,
-            {counts.mcpAdmin} in all. For you.</span
-          >
-        </div>
-      </div>
-    </div>
-
-    <div>
-      <h3 class="font-semibold mb-3">Connect in seconds</h3>
-      <div
-        class="bg-surface-overlay rounded-lg p-4 font-mono text-xs leading-relaxed"
-      >
-        <p class="text-text-muted">// any MCP client's config</p>
-        <p>{"{"}</p>
-        <p class="pl-4">"mcpServers": {"{"}</p>
-        <p class="pl-8">"pyrite": {"{"}</p>
-        <p class="pl-12">
-          "command": "<span class="text-pyrite-400"
-            >/path/to/.venv/bin/pyrite</span
-          >",
-        </p>
-        <p class="pl-12">"args": ["<span class="text-pyrite-400">mcp</span>"]</p>
-        <p class="pl-8">{"}"}</p>
-        <p class="pl-4">{"}"}</p>
-        <p>{"}"}</p>
-      </div>
-      <p class="text-text-muted text-xs mt-3 leading-relaxed">
-        For Claude Code and Claude Desktop, run
-        <code class="text-text-secondary">pyrite mcp-setup</code>: it writes the
-        config each client reads, at the write tier. Writing it by hand? Use the
-        absolute path from <code class="text-text-secondary">which pyrite</code>
-        — clients do not see your shell's PATH or an activated venv.
+<section
+  id="agents"
+  aria-labelledby="agents-title"
+  class="home-section grid grid-cols-[repeat(auto-fit,minmax(min(440px,100%),1fr))] gap-x-16 gap-y-12 items-start"
+>
+  <div class="flex flex-col gap-7">
+    <div class="flex flex-col gap-4">
+      <div class="eyebrow">Agents are users too</div>
+      <h2 id="agents-title" class="section-title">Give each agent the keys it needs, and no more.</h2>
+      <p class="text-[17px] text-text-secondary text-pretty">
+        Agents get the same schema validation, typed errors and permissions as
+        people. Pick a tier per connection.
       </p>
     </div>
+    <div class="flex flex-col border-b border-line">
+      {
+        tiers.map((t) => (
+          <div class="grid grid-cols-[72px_minmax(0,1fr)] gap-x-5 gap-y-1 py-[18px] border-t border-line">
+            <span class="font-mono text-[13px] text-brand leading-[1.7]">{t.name}</span>
+            <div class="flex flex-col gap-2">
+              <div class="flex justify-between gap-3">
+                <span class="font-semibold">{t.title}</span>
+                <span class="font-semibold tabular-nums whitespace-nowrap">{t.tools} tools</span>
+              </div>
+              <div aria-hidden="true" class="h-1 bg-surface-overlay rounded-full">
+                <div class="h-1 bg-brand rounded-full" style={`width: ${pct(t.tools)}`} />
+              </div>
+              <span class="text-[13px] text-text-secondary">{t.note}</span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-4">
+    <figure
+      aria-label="MCP configuration for Pyrite"
+      class="bg-surface-raised border border-line rounded-[10px] overflow-hidden font-mono text-[13px] leading-[1.7]"
+    >
+      <div class="px-[18px] py-3 border-b border-line bg-surface-overlay text-text-secondary text-xs">claude_desktop_config.json</div>
+      <div class="p-[18px] overflow-x-auto [&>div]:whitespace-pre">
+        {
+          config.map(([indent, key, rest]) => (
+            <div>{" ".repeat(indent)}{key && <span class="text-brand">{key}</span>}{rest}</div>
+          ))
+        }
+      </div>
+    </figure>
+    <p class="text-sm text-text-secondary">
+      Or let Pyrite write it:
+      <code class="font-mono text-[13px] text-text-primary bg-surface-overlay px-1.5 py-0.5 rounded-md">pyrite mcp-setup</code>
+      configures Claude Desktop and Claude Code. Writing it by hand? Use the
+      absolute path from <code class="font-mono text-[13px] text-text-primary">which pyrite</code>:
+      clients do not see your shell's PATH or an activated venv.
+    </p>
   </div>
 </section>

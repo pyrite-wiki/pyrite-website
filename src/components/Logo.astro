@@ -1,0 +1,37 @@
+---
+/** The pyrite crystal mark. `detailed` adds the vertex ties and corner dots. */
+interface Props {
+  size?: number;
+  detailed?: boolean;
+}
+
+const { size = 30, detailed = false } = Astro.props;
+---
+
+<svg
+  viewBox="361 360 1210 1210"
+  width={size}
+  height={size}
+  aria-hidden="true"
+  class="text-brand shrink-0"
+  fill="none"
+  stroke="currentColor"
+  stroke-width={detailed ? 44 : 48}
+  stroke-linejoin="round"
+  stroke-linecap="round"
+>
+  <path d="M600 765L966 965V1380L600 1170Z" fill="currentColor" fill-opacity=".6" stroke="none"></path>
+  <path d="M966 410L480 690V1240L966 1525L1450 1240V690Z"></path>
+  {detailed && <path d="M966 410V555M480 690L600 760M1450 690L1330 760M480 1240L600 1170M1450 1240L1330 1170M966 1380V1525"></path>}
+  <path d="M966 555L600 760V1170L966 1380L1330 1170V760Z"></path>
+  <path d="M600 760L966 965L1330 760M966 965V1380"></path>
+  {
+    detailed && (
+      <g fill="currentColor" stroke="none">
+        <circle cx="966" cy="410" r="48" />
+        <circle cx="480" cy="1240" r="48" />
+        <circle cx="1450" cy="1240" r="48" />
+      </g>
+    )
+  }
+</svg>

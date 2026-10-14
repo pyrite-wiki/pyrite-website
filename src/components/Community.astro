@@ -2,42 +2,38 @@
 import { community } from "../data/release";
 ---
 
-<section class="px-6 py-20 max-w-4xl mx-auto">
-  <h2 class="text-3xl font-bold text-center mb-4">Built in the open</h2>
-  <p class="text-text-secondary text-center mb-10 max-w-2xl mx-auto">
-    When v{community.previousVersion} shipped in September, {community.outsideContributorsAtPrevious + 1}
-    people had code in Pyrite. Three weeks later, {community.people} do.
-  </p>
-
-  <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 text-center mb-10">
-    <div>
-      <div class="text-2xl font-bold text-pyrite-400">{community.people}</div>
-      <div class="text-text-secondary text-sm">Contributors</div>
-    </div>
-    <div>
-      <div class="text-2xl font-bold text-pyrite-400">
-        {community.outsideContributorsAtPrevious + 1}
+<section id="community" aria-labelledby="community-title" class="home-section pb-[clamp(64px,8vw,112px)]">
+  <div class="grid grid-cols-[repeat(auto-fit,minmax(min(420px,100%),1fr))] gap-x-16 gap-y-10 p-[clamp(28px,4vw,48px)] bg-surface-raised border border-line rounded-[10px]">
+    <div class="flex flex-col gap-4">
+      <div class="eyebrow">Community</div>
+      <h2 id="community-title" class="section-title">Pyrite is a community project now.</h2>
+      <p class="text-base text-text-secondary text-pretty">
+        Bugs, docs that drift from the code, and roadmap items are all open on
+        GitHub. Multi-user hardening is where help matters most right now.
+      </p>
+      <div class="flex flex-wrap gap-3 pt-2">
+        <a class="btn btn-secondary min-h-11 px-[18px] text-sm" href="https://github.com/pyrite-wiki/pyrite/blob/main/CONTRIBUTING.md">Read CONTRIBUTING</a>
+        <a class="btn btn-secondary min-h-11 px-[18px] text-sm" href="https://github.com/pyrite-wiki/pyrite/issues">Browse open issues</a>
+        <a class="btn btn-secondary min-h-11 px-[18px] text-sm" href="/community">Meet the contributors</a>
       </div>
-      <div class="text-text-secondary text-sm">At v{community.previousVersion}</div>
     </div>
-    <div>
-      <div class="text-2xl font-bold text-pyrite-400">{community.outsidePrs}</div>
-      <div class="text-text-secondary text-sm">Merged PRs from contributors</div>
-    </div>
-    <div>
-      <div class="text-2xl font-bold text-pyrite-400">
-        {community.openPrsFromContributors}
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(min(150px,100%),1fr))] gap-6 content-center">
+      <div class="flex flex-col gap-1">
+        <span class="font-serif font-semibold text-[44px] leading-[1.1] tabular-nums">{community.people}</span>
+        <span class="text-[13px] text-text-secondary">
+          contributors, from {community.outsideContributorsAtPrevious + 1} at v{community.previousVersion}
+        </span>
       </div>
-      <div class="text-text-secondary text-sm">Contributor PRs open now</div>
+      <div class="flex flex-col gap-1">
+        <span class="font-serif font-semibold text-[44px] leading-[1.1] tabular-nums">{community.outsidePrs}</span>
+        <span class="text-[13px] text-text-secondary">pull requests merged from contributors</span>
+      </div>
+      <div class="flex flex-col gap-1">
+        <span class="font-serif font-semibold text-[44px] leading-[1.1] tabular-nums">
+          {community.openPrsFromContributors}<span class="text-[22px] text-text-secondary"> / {community.openPrs}</span>
+        </span>
+        <span class="text-[13px] text-text-secondary">open pull requests come from contributors</span>
+      </div>
     </div>
-  </div>
-
-  <div class="text-center">
-    <a
-      href="/community"
-      class="inline-flex items-center justify-center px-4 py-2 rounded-lg border border-white/20 text-sm font-semibold hover:border-white/40 transition-colors"
-    >
-      Meet the contributors
-    </a>
   </div>
 </section>

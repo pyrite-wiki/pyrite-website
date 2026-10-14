@@ -41,7 +41,7 @@ const next = currentIndex < sorted.length - 1 ? sorted[currentIndex + 1] : null;
     </div>
 
     <!-- Prev / Next navigation -->
-    <nav class="mt-16 pt-8 border-t border-white/10 flex justify-between gap-4">
+    <nav class="mt-16 pt-8 border-t border-line flex justify-between gap-4">
       {prev ? (
         <a
           href={`/docs/${slug(prev.id)}`}

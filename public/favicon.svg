@@ -1,9 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#facc15"/>
-      <stop offset="100%" stop-color="#ca8a04"/>
-    </linearGradient>
-  </defs>
-  <text x="4" y="26" font-family="system-ui, sans-serif" font-size="28" font-weight="bold" fill="url(#g)">Py</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="361 360 1210 1210" fill="none" stroke="#D4A843" stroke-width="64" stroke-linejoin="round" stroke-linecap="round">
+  <path d="M600 765L966 965V1380L600 1170Z" fill="#D4A843" fill-opacity=".6" stroke="none"/>
+  <path d="M966 410L480 690V1240L966 1525L1450 1240V690Z"/>
+  <path d="M966 555L600 760V1170L966 1380L1330 1170V760Z"/>
+  <path d="M600 760L966 965L1330 760M966 965V1380"/>
 </svg>

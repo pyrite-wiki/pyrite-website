@@ -1,28 +1,26 @@
 ---
-import { counts } from "../data/release";
+import { counts, community } from "../data/release";
+
+const stats = [
+  { value: counts.mcpTools, label: "MCP tools across three access tiers" },
+  { value: counts.tests, label: "tests passing" },
+  {
+    value: community.people,
+    label: `contributors, up from ${community.outsideContributorsAtPrevious + 1} in September`,
+  },
+  { value: "MIT", label: "licensed, local-first, no subscription" },
+];
 ---
 
-<section class="px-6 py-16 border-y border-white/5">
-  <div
-    class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-8 text-center"
-  >
-    <div>
-      <div class="text-2xl font-bold text-text-primary">{counts.mcpTools}</div>
-      <div class="text-text-muted text-sm">MCP tools</div>
-    </div>
-    <div>
-      <div class="text-2xl font-bold text-text-primary">
-        {counts.extensions}
-      </div>
-      <div class="text-text-muted text-sm">Extensions</div>
-    </div>
-    <div>
-      <div class="text-2xl font-bold text-text-primary">{counts.tests}</div>
-      <div class="text-text-muted text-sm">Tests passing</div>
-    </div>
-    <div>
-      <div class="text-2xl font-bold text-text-primary">MIT</div>
-      <div class="text-text-muted text-sm">Licensed</div>
-    </div>
+<section aria-label="Project at a glance" class="border-y border-line">
+  <div class="max-w-[1200px] mx-auto px-[clamp(16px,4vw,40px)] py-7 grid grid-cols-[repeat(auto-fit,minmax(min(200px,100%),1fr))] gap-x-8 gap-y-6">
+    {
+      stats.map((s) => (
+        <div class="flex flex-col gap-0.5">
+          <span class="text-[28px] font-semibold leading-[1.2] tabular-nums">{s.value}</span>
+          <span class="text-[13px] text-text-secondary">{s.label}</span>
+        </div>
+      ))
+    }
   </div>
 </section>

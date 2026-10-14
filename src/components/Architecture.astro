@@ -1,42 +1,40 @@
 ---
+const interfaces = ["MCP server", "CLI", "REST API", "Web UI"];
 ---
 
-<section class="px-6 py-20 max-w-4xl mx-auto">
-  <h2 class="text-3xl font-bold text-center mb-4">How it works</h2>
-  <p class="text-text-secondary text-center mb-12 max-w-2xl mx-auto">
-    Markdown files with YAML frontmatter in git are the source of truth. Pyrite
-    builds a fast search index on top and exposes everything through multiple
-    interfaces.
-  </p>
-
-  <img
-    src="/diagram1.jpg"
-    alt="Architecture diagram: git-versioned markdown files flow into a SQLite index (FTS5 + vector embeddings), which serves MCP Server, CLI, REST API, and Web UI. Any AI connects here."
-    class="w-full rounded-xl"
-    loading="lazy"
-  />
-
-  <div class="grid sm:grid-cols-3 gap-6 mt-10 text-sm">
-    <div class="text-center">
-      <div class="text-pyrite-400 font-semibold mb-1">Source of truth</div>
-      <div class="text-text-secondary">
-        Plain markdown files in a git repo. Read them in any editor. Diff, branch,
-        review.
-      </div>
+<section id="how" aria-labelledby="how-title" class="home-section flex flex-col gap-10">
+  <div class="flex flex-col gap-4 max-w-[44rem]">
+    <div class="eyebrow">How it works</div>
+    <h2 id="how-title" class="section-title">The files are the truth. Everything else is derived.</h2>
+  </div>
+  <div class="flex flex-wrap items-stretch gap-4">
+    <div class="flex-[1_1_240px] flex flex-col gap-2 p-6 bg-surface-raised border border-brand rounded-[10px]">
+      <span class="eyebrow">Source of truth</span>
+      <span class="text-base font-semibold leading-[1.4]">Markdown in git</span>
+      <span class="text-sm text-text-secondary leading-normal">
+        Typed entries with YAML frontmatter. Reviewable, diffable, portable.
+      </span>
     </div>
-    <div class="text-center">
-      <div class="text-pyrite-400 font-semibold mb-1">Derived index</div>
-      <div class="text-text-secondary">
-        SQLite FTS5 + optional vector embeddings. Rebuild from files any time with
-        <code class="text-text-primary">pyrite index build</code>.
-      </div>
+    <div aria-hidden="true" class="flex-none flex items-center justify-center text-text-secondary max-sm:w-full max-sm:rotate-90">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
     </div>
-    <div class="text-center">
-      <div class="text-pyrite-400 font-semibold mb-1">Multiple interfaces</div>
-      <div class="text-text-secondary">
-        CLI for automation, MCP for AI agents, REST API for apps, Web UI for
-        humans.
+    <div class="flex-[1_1_240px] flex flex-col gap-2 p-6 bg-surface-raised border border-line rounded-[10px]">
+      <span class="eyebrow !text-text-secondary">Derived index</span>
+      <span class="text-base font-semibold leading-[1.4]">SQLite + embeddings</span>
+      <span class="text-sm text-text-secondary leading-normal">
+        Fast structured and semantic search. Delete it and rebuild it from the
+        files with <code class="font-mono text-[13px] text-text-primary">pyrite index build</code>.
+      </span>
+    </div>
+    <div aria-hidden="true" class="flex-none flex items-center justify-center text-text-secondary max-sm:w-full max-sm:rotate-90">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+    </div>
+    <div class="flex-[1.4_1_320px] flex flex-col gap-3 p-6 bg-surface-raised border border-line rounded-[10px]">
+      <span class="eyebrow !text-text-secondary">Interfaces</span>
+      <div class="grid grid-cols-2 gap-2">
+        {interfaces.map((name) => <span class="px-3 py-2.5 bg-surface-overlay rounded-md text-sm font-medium">{name}</span>)}
       </div>
+      <span class="text-sm text-text-secondary leading-normal">All four read and write the same files.</span>
     </div>
   </div>
 </section>

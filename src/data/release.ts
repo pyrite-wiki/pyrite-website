@@ -23,6 +23,8 @@ export const release = {
   security: true,
   securityNote:
     "0.25.1–0.25.5 were security releases for servers with accounts turned on or reachable by other people, and 0.25.7 fixes a save that could drop a body's first line. If you are on 0.24.x, upgrade, then run pyrite index build once.",
+  /** One line for the homepage banner. Keep it short: it sits beside the version. */
+  bannerNote: "Security fixes. Coming from 0.24.x? Rebuild your index after upgrading.",
   /** The headline for this release, from the 0.25.7 release notes. */
   headline:
     "The first hour works. Install from the README, connect Claude Code or Claude Desktop with pyrite mcp-setup, and everything does what the docs say — a tutorial that CI runs as a test keeps it that way.",
