@@ -73,11 +73,16 @@ Six extensions ship with Pyrite:
 | Extension | Purpose | Key Types |
 |-----------|---------|-----------|
 | **software-kb** | Software project management | ADRs, components, backlog items, standards, runbooks |
-| **zettelkasten** | CEQRC maturity workflow | Notes with maturity progression |
-| **encyclopedia** | Articles with review workflow | Articles, reviews, voting |
-| **social** | Engagement tracking | Social interactions |
+| **zettelkasten** *(example plugin)* | CEQRC maturity workflow | Notes with maturity progression |
+| **encyclopedia** *(example plugin)* | Articles with review workflow | Articles, reviews, voting |
+| **social** *(example plugin)* | Engagement tracking | Social interactions |
 | **cascade** | Timeline research | Timeline events, actors, capture lanes |
-| **journalism-investigation** | Investigative research | Sources, claims, actors, evidence chains |
+| **journalism-investigation** *(experimental)* | Investigative research | Sources, claims, actors, evidence chains |
+
+The three example plugins are reference code showing how a plugin adds entry
+types, CLI commands, MCP tools and a preset, not supported products.
+journalism-investigation's MCP tools are unsupported until the 0.28 plugin/API
+contract.
 
 Task management is no longer an extension — `task` is a built-in entry type, with task tools in the core MCP server and a `pyrite task` command group.
 
