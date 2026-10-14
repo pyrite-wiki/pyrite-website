@@ -4,12 +4,7 @@ description: "Four weeks ago Pyrite had no outside contributors. v0.25.7 has cod
 date: 2026-10-13
 author: Mark Ramm
 tags: [community, release, security]
-draft: true
 ---
-
-<!-- DRAFT for Mark's edit. Every figure below was measured on 2026-10-13
-     against the v0.25.7 tag and the GitHub API; see the comments in
-     src/data/release.ts for how. Set draft: false to publish. -->
 
 On September 17, Ruslan Terekhov sent the first pull request to Pyrite from
 someone other than me: the MCP SSE endpoint broke under version 2.0 of the MCP
@@ -20,7 +15,10 @@ Four weeks later, v0.25.7 has code in it from twenty-three people. Seventy-seven
 of the 354 pull requests ever merged came from contributors, and fifty-nine of
 the sixty-two open right now are theirs.
 
-<!-- TODO(Mark): how it felt, and where the contributors came from. -->
+I didn't see that coming. I had been quietly using Pyrite in my own work, and
+had no idea anyone else was interested until that first pull request arrived.
+So I wrote up a few issues and tagged them "good first issue" on GitHub, and
+everything changed.
 
 ## The first thing that broke was the process
 
@@ -32,8 +30,9 @@ is cut.
 
 Credit broke too. One contributor fixed a documented-but-missing command
 fourteen minutes before another pull request merged the identical line, and
-the fix shipped in 0.24.2 without thanking the person who got there first. The release script now reads `Co-authored-by:` trailers over the
-release's own commits — the form CONTRIBUTING.md asks for, and the only one
+the fix shipped in 0.24.2 without thanking the person who got there first.
+The release script now reads `Co-authored-by:` trailers over the release's own
+commits — the form CONTRIBUTING.md asks for, and the only one
 that survives the merge queue's squash.
 
 ## Taking other people's data seriously
@@ -68,7 +67,29 @@ tutorial runs in CI as a test.
 
 ## Thank you
 
-<!-- TODO(Mark): name the contributions that mattered most to you. -->
+Some of the work above is theirs.
+
+**makiaveli1** landed more than anyone outside: 36 commits. Among them is a
+series of ten pull requests for #223 that went through every extension —
+cascade, software-kb, the wiki, zettelkasten, social, investigation — and made
+each list tool return only the KBs its caller may read. They also made the web
+clipper re-check every redirect hop rather than just the first URL, removed a
+git pull that leaked unredacted errors, and gave REST, MCP and the CLI one
+shared field-projection helper.
+
+**sb123sb123** sent sixteen fixes, most of them to storage and the CLI:
+refusing a rename onto an id that already exists, validating what a
+`before_save` hook hands back, reporting sqlite-vec load failures instead of
+silently going without, and listing a KB's declared types in validation errors.
+
+**AbelTomato** stopped bulk create from overwriting existing entries, which
+shipped in 0.25.3. **zhongxiao-chang** anchored bare YAML dates to UTC, and
+made Pyrite write timestamps back only to files that already carry them.
+**HarshRajSinghania** made the container bind correctly and honour the
+platform's port, which the Railway, Render and Fly.io deploys depend on.
+**ANO3457** fixed races in the web UI and added guards to the test suite, with
+forty more pull requests open as I write this. And **Ruslan Terekhov**
+(AsyncLegs) went first.
 
 Every one of them is on the [community page](/community). If you want to join
 them, start with
