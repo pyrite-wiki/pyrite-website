@@ -1,89 +1,23 @@
 ---
+import Logo from "./Logo.astro";
 ---
 
-<nav class="border-b border-white/10 px-6 py-4">
-  <div class="max-w-6xl mx-auto flex items-center justify-between">
-    <a href="/" class="text-xl font-bold">
-      <span class="text-gradient">Py</span>rite
+<header class="border-b border-line">
+  <div class="max-w-[1200px] mx-auto px-[clamp(16px,4vw,40px)] py-3.5 flex flex-wrap items-center gap-x-8 gap-y-3">
+    <a href="/" aria-label="Pyrite home" class="flex items-center gap-2.5 no-underline text-text-primary min-h-11">
+      <Logo detailed />
+      <span class="font-serif font-semibold text-[23px] tracking-[-0.01em] leading-none">pyrite</span>
     </a>
-
-    <!-- Desktop nav -->
-    <div class="hidden sm:flex items-center gap-6 text-sm text-text-secondary">
-      <a href="/use-cases" class="hover:text-text-primary transition-colors"
-        >Use Cases</a
-      >
-      <a href="/plugins" class="hover:text-text-primary transition-colors"
-        >Plugins</a
-      >
-      <a href="/docs" class="hover:text-text-primary transition-colors">Docs</a
-      >
-      <a href="/blog" class="hover:text-text-primary transition-colors">Blog</a
-      >
-      <a href="/community" class="hover:text-text-primary transition-colors"
-        >Community</a
-      >
-      <a
-        href="https://demo.pyrite.wiki"
-        class="hover:text-text-primary transition-colors">Demo</a
-      >
-      <a
-        href="https://github.com/pyrite-wiki/pyrite"
-        class="hover:text-text-primary transition-colors">GitHub</a
-      >
+    <nav class="nav flex flex-wrap items-center gap-x-6 text-[13.5px] font-medium flex-auto" aria-label="Primary">
+      <a href="/docs" class="py-3">Docs</a>
+      <a href="/use-cases" class="py-3">Use cases</a>
+      <a href="/plugins" class="py-3">Plugins</a>
+      <a href="/blog" class="py-3">Blog</a>
+      <a href="/community" class="py-3">Community</a>
+    </nav>
+    <div class="flex items-center gap-2.5">
+      <a class="btn btn-secondary min-h-10 px-3.5 text-[13.5px]" href="https://github.com/pyrite-wiki/pyrite">GitHub</a>
+      <a class="btn btn-primary min-h-10 px-4 text-[13.5px]" href="https://demo.pyrite.wiki">Try the demo</a>
     </div>
-
-    <!-- Mobile hamburger -->
-    <button
-      id="mobile-menu-btn"
-      class="sm:hidden p-2 text-text-secondary hover:text-text-primary"
-      aria-label="Open menu"
-    >
-      <svg
-        class="w-5 h-5"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16"></path>
-      </svg>
-    </button>
   </div>
-
-  <!-- Mobile menu -->
-  <div
-    id="mobile-menu"
-    class="hidden sm:hidden mt-4 pb-2 flex flex-col gap-3 text-sm text-text-secondary"
-  >
-    <a href="/use-cases" class="hover:text-text-primary transition-colors"
-      >Use Cases</a
-    >
-    <a href="/plugins" class="hover:text-text-primary transition-colors"
-      >Plugins</a
-    >
-    <a href="/docs" class="hover:text-text-primary transition-colors">Docs</a>
-    <a href="/blog" class="hover:text-text-primary transition-colors">Blog</a>
-    <a href="/community" class="hover:text-text-primary transition-colors"
-      >Community</a
-    >
-    <a
-      href="https://demo.pyrite.wiki"
-      class="hover:text-text-primary transition-colors">Demo</a
-    >
-    <a
-      href="https://github.com/pyrite-wiki/pyrite"
-      class="hover:text-text-primary transition-colors">GitHub</a
-    >
-  </div>
-</nav>
-
-<script>
-  const btn = document.getElementById("mobile-menu-btn");
-  const menu = document.getElementById("mobile-menu");
-  btn?.addEventListener("click", () => {
-    menu?.classList.toggle("hidden");
-  });
-</script>
+</header>

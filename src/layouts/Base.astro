@@ -1,6 +1,8 @@
 ---
 import "../assets/styles.css";
 import Nav from "../components/Nav.astro";
+import Head from "../components/Head.astro";
+import Footer from "../components/Footer.astro";
 
 interface Props {
   title: string;
@@ -14,32 +16,16 @@ const { title, description = "Knowledge-as-Code for humans and AI agents" } =
 <!doctype html>
 <html lang="en" class="bg-surface text-text-primary">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
+    <Head title={title} description={description} />
   </head>
   <body class="min-h-screen flex flex-col antialiased">
+    <slot name="banner" />
     <Nav />
 
     <main class="flex-1">
       <slot />
     </main>
 
-    <footer
-      class="border-t border-white/10 px-6 py-8 text-center text-sm text-text-muted"
-    >
-      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-        <p>MIT License. Built with Pyrite's own knowledge base.</p>
-        <div class="flex gap-6">
-          <a href="https://github.com/pyrite-wiki/pyrite" class="hover:text-text-secondary transition-colors">GitHub</a>
-        </div>
-      </div>
-    </footer>
+    <Footer />
   </body>
 </html>

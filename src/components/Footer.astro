@@ -1,0 +1,25 @@
+---
+import Logo from "./Logo.astro";
+---
+
+<footer class="border-t border-line">
+  <div class="max-w-[1200px] mx-auto px-[clamp(16px,4vw,40px)] pt-10 pb-12 flex flex-wrap justify-between gap-x-12 gap-y-6">
+    <div class="flex flex-col gap-3 max-w-[30rem]">
+      <div class="flex items-center gap-2.5">
+        <Logo size={24} />
+        <span class="font-serif font-semibold text-[19px] leading-none">pyrite</span>
+      </div>
+      <p class="text-[13px] text-text-secondary leading-[1.55]">
+        Named for fool's gold: information is worth what you've checked. Built
+        and documented with its own knowledge base.
+      </p>
+    </div>
+    <nav class="nav flex flex-wrap gap-x-6 text-[13.5px] content-start" aria-label="Footer">
+      <a href="/docs" class="py-3">Docs</a>
+      <a href="https://demo.pyrite.wiki" class="py-3">Demo</a>
+      <a href="https://github.com/pyrite-wiki/pyrite" class="py-3">GitHub</a>
+      <a href="https://github.com/pyrite-wiki/pyrite/blob/main/SECURITY.md" class="py-3">Security</a>
+      <span class="py-3 text-text-secondary">MIT License</span>
+    </nav>
+  </div>
+</footer>

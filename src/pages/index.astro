@@ -7,13 +7,15 @@ import Features from "../components/Features.astro";
 import Architecture from "../components/Architecture.astro";
 import MCP from "../components/MCP.astro";
 import UseCases from "../components/UseCases.astro";
-import Deploy from "../components/Deploy.astro";
 import QuickStart from "../components/QuickStart.astro";
 import Community from "../components/Community.astro";
 ---
 
-<Base title="Pyrite — Knowledge-as-Code for humans and AI agents">
-  <ReleaseBanner />
+<Base
+  title="Pyrite — knowledge as code"
+  description="Pyrite keeps what you know as typed markdown in git, checked against a schema and shared with AI agents through MCP."
+>
+  <ReleaseBanner slot="banner" />
   <Hero />
   <Stats />
   <Features />
@@ -22,5 +24,4 @@ import Community from "../components/Community.astro";
   <UseCases />
   <QuickStart />
   <Community />
-  <Deploy />
 </Base>

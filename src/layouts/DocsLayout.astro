@@ -1,6 +1,8 @@
 ---
 import "../assets/styles.css";
 import Nav from "../components/Nav.astro";
+import Head from "../components/Head.astro";
+import Footer from "../components/Footer.astro";
 import { getCollection } from "astro:content";
 
 interface Props {
@@ -29,22 +31,14 @@ const sections = [
 <!doctype html>
 <html lang="en" class="bg-surface text-text-primary">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content={Astro.url} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
+    <Head title={title} description={description} />
   </head>
   <body class="min-h-screen flex flex-col antialiased">
     <Nav />
 
     <div class="flex-1 flex max-w-7xl mx-auto w-full">
       <!-- Sidebar -->
-      <aside class="hidden lg:block w-64 shrink-0 border-r border-white/10 py-8 pr-6 pl-6 overflow-y-auto sticky top-0 h-screen">
+      <aside class="hidden lg:block w-64 shrink-0 border-r border-line py-8 pr-6 pl-6 overflow-y-auto sticky top-0 h-screen">
         <nav class="space-y-6">
           {sections.map(({ key, label }) => {
             const sectionDocs = sorted.filter((d) => d.data.section === key);
@@ -95,7 +89,7 @@ const sections = [
       <!-- Mobile sidebar overlay -->
       <div id="docs-sidebar-overlay" class="hidden lg:hidden fixed inset-0 z-40">
         <div class="absolute inset-0 bg-black/60" id="docs-sidebar-backdrop"></div>
-        <aside class="absolute right-0 top-0 bottom-0 w-72 bg-surface border-l border-white/10 py-6 px-6 overflow-y-auto">
+        <aside class="absolute right-0 top-0 bottom-0 w-72 bg-surface border-l border-line py-6 px-6 overflow-y-auto">
           <div class="flex justify-between items-center mb-6">
             <span class="text-sm font-semibold text-text-muted uppercase tracking-wider">Docs</span>
             <button id="docs-sidebar-close" class="text-text-muted hover:text-text-primary">
@@ -145,14 +139,7 @@ const sections = [
       </main>
     </div>
 
-    <footer class="border-t border-white/10 px-6 py-8 text-center text-sm text-text-muted">
-      <div class="max-w-6xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-        <p>MIT License. Built with Pyrite's own knowledge base.</p>
-        <div class="flex gap-6">
-          <a href="https://github.com/pyrite-wiki/pyrite" class="hover:text-text-secondary transition-colors">GitHub</a>
-        </div>
-      </div>
-    </footer>
+    <Footer />
 
     <script>
       const btn = document.getElementById("docs-sidebar-btn");

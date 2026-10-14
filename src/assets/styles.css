@@ -1,32 +1,126 @@
 @import "tailwindcss";
 
 @theme {
-  /* Pyrite brand colors — gold/amber tones from the mineral */
-  --color-pyrite-50: #fefce8;
-  --color-pyrite-100: #fef9c3;
-  --color-pyrite-200: #fef08a;
-  --color-pyrite-300: #fde047;
-  --color-pyrite-400: #facc15;
-  --color-pyrite-500: #eab308;
-  --color-pyrite-600: #ca8a04;
-  --color-pyrite-700: #a16207;
-  --color-pyrite-800: #854d0e;
-  --color-pyrite-900: #713f12;
+  /* Pyrite brand gold. 400/500 are the brand fill; 300 is for text on dark. */
+  --color-pyrite-50: #fbf6e8;
+  --color-pyrite-100: #f5eac8;
+  --color-pyrite-200: #ecd89a;
+  --color-pyrite-300: #e2c470;
+  --color-pyrite-400: #d4a843;
+  --color-pyrite-500: #d4a843;
+  --color-pyrite-600: #b38a2e;
+  --color-pyrite-700: #8a6f2e;
+  --color-pyrite-800: #6b5524;
+  --color-pyrite-900: #4d3d1a;
 
-  --color-surface: #0f1117;
-  --color-surface-raised: #1a1d2b;
-  --color-surface-overlay: #242838;
-  --color-text-primary: #f1f5f9;
-  --color-text-secondary: #94a3b8;
-  --color-text-muted: #64748b;
+  --color-brand: #d4a843;
+  --color-on-brand: #141414;
+
+  /* surface = page ground; raised = cards; overlay = insets inside cards. */
+  --color-surface: #0b0b0d;
+  --color-surface-raised: #17171a;
+  --color-surface-overlay: #1e1e22;
+  --color-line: #2a2a30;
+  --color-text-primary: #e6e4df;
+  --color-text-secondary: #9d9da6;
+  --color-text-muted: #6b6b74;
+
+  --color-ok: #5fa97a;
+  --color-warn: #c9924b;
+  --color-critical: #c96257;
+
+  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+  --font-serif: "IBM Plex Serif", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
-/* Smooth gradient text utility */
-.text-gradient {
-  background: linear-gradient(135deg, var(--color-pyrite-400), var(--color-pyrite-600));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+body {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.nav a {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+
+.nav a:hover {
+  color: var(--color-text-primary);
+}
+
+.link {
+  color: var(--color-brand);
+}
+
+.link:hover {
+  color: var(--color-text-primary);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 6px;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: var(--color-brand);
+  color: var(--color-on-brand);
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.08);
+}
+
+.btn-secondary {
+  border: 1px solid var(--color-line);
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.btn-secondary:hover {
+  background: var(--color-surface-overlay);
+}
+
+/* Small uppercase label above a section heading. */
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--color-brand);
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.chip {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 2px 10px;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  color: var(--color-text-secondary);
+}
+
+/* A section on the homepage: centered, gutters that shrink on phones. */
+.home-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(64px, 8vw, 112px) clamp(16px, 4vw, 40px) 0;
 }
 
 /* Prose styles for rendered markdown in docs */
@@ -37,8 +131,9 @@
 
 .prose h2 {
   color: var(--color-text-primary);
+  font-family: var(--font-serif);
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-top: 2.5rem;
   margin-bottom: 1rem;
   padding-bottom: 0.5rem;

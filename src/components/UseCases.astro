@@ -1,56 +1,65 @@
 ---
+import { counts } from "../data/release";
+
+const words = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+const extensionCount = words[counts.extensions] ?? String(counts.extensions);
+
 const cases = [
+  {
+    title: "Research and investigations",
+    description:
+      "People, organizations, events and relationships across sources, with timeline and graph views.",
+    link: "/use-cases#research",
+    tags: ["cascade", "journalism-investigation"],
+  },
   {
     title: "Software teams",
     description:
-      "ADRs, component docs, backlog items, runbooks — all structured, validated, and searchable. Your AI pair programmer gets full project context through MCP.",
+      "ADRs, components, backlog items, standards and runbooks: structured, validated and searchable.",
     link: "/use-cases#software",
-    plugin: "software-kb",
-  },
-  {
-    title: "Research & investigations",
-    description:
-      "Track people, organizations, events, and relationships across sources. Timeline visualization and knowledge graph reveal hidden connections.",
-    link: "/use-cases#research",
-    plugin: "cascade",
+    tags: ["software-kb"],
   },
   {
     title: "Personal knowledge",
-    description:
-      "Zettelkasten-style note-taking with maturity workflows. Capture fleeting thoughts, develop them into permanent notes, let AI help you find connections.",
+    description: "Notes that mature: capture, elaborate, question, refine, connect.",
     link: "/use-cases#personal",
-    plugin: "zettelkasten",
+    tags: ["zettelkasten"],
   },
   {
     title: "Team wikis",
-    description:
-      "For a team that trusts each other: structured entries, wikilinks, collections, and a web UI everyone can use. $6/month on a VPS. Multi-user is still experimental.",
-    link: "/use-cases#teams",
-    plugin: null,
+    description: "About $6 a month on a small VPS. Multi-user is still experimental.",
+    link: "#self-host",
+    tags: ["self-hosted"],
   },
 ];
 ---
 
-<section class="px-6 py-20 max-w-6xl mx-auto">
-  <h2 class="text-3xl font-bold text-center mb-12">Built for</h2>
-  <div class="grid sm:grid-cols-2 gap-8">
+<section id="use-cases" aria-labelledby="uses-title" class="home-section flex flex-col gap-10">
+  <div class="flex flex-wrap items-end justify-between gap-x-8 gap-y-4">
+    <div class="flex flex-col gap-4 max-w-[40rem]">
+      <div class="eyebrow">Use cases</div>
+      <h2 id="uses-title" class="section-title">One engine, shaped by extensions</h2>
+    </div>
+    <a href="/plugins" class="link text-sm font-medium py-3">All {extensionCount} extensions</a>
+  </div>
+  <div class="grid grid-cols-[repeat(auto-fit,minmax(min(260px,100%),1fr))] gap-4">
     {
       cases.map((c) => (
         <a
           href={c.link}
-          class="block p-6 rounded-xl bg-surface-raised border border-white/5 hover:border-white/15 transition-colors"
+          class="flex flex-col gap-3 p-6 bg-surface-raised border border-line rounded-[10px] text-text-primary no-underline hover:border-text-muted transition-colors"
         >
-          <h3 class="text-lg font-semibold mb-2">{c.title}</h3>
-          <p class="text-text-secondary text-sm leading-relaxed mb-3">
-            {c.description}
-          </p>
-          {c.plugin && (
-            <span class="inline-block text-xs font-mono px-2 py-0.5 rounded bg-surface-overlay text-pyrite-400">
-              {c.plugin} extension
-            </span>
-          )}
+          <span class="text-base font-semibold leading-[1.4]">{c.title}</span>
+          <span class="text-sm text-text-secondary leading-[1.55] grow">{c.description}</span>
+          <span class="flex flex-wrap gap-1.5">
+            {c.tags.map((t) => <span class="chip">{t}</span>)}
+          </span>
         </a>
       ))
     }
   </div>
+  <p class="text-sm text-text-secondary">
+    Need your own shape? Extensions add entry types, MCP tools, CLI commands,
+    validators and lifecycle hooks. <a href="/docs/plugin-protocol" class="link">Write a plugin</a>
+  </p>
 </section>

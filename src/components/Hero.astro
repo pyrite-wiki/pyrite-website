@@ -1,34 +1,57 @@
 ---
+import { status } from "../data/release";
 ---
 
-<section class="px-6 py-24 max-w-4xl mx-auto text-center">
-  <h1 class="text-5xl sm:text-6xl font-bold tracking-tight mb-6">
-    A second brain for you,<br />
-    your agents, and your teams
-  </h1>
-  <p class="text-xl text-text-secondary max-w-2xl mx-auto mb-10">
-    Structured knowledge in markdown files. Schema-validated, versioned in git,
-    searchable by any AI through MCP. One brain, every AI, persistent memory that
-    compounds over time.
-  </p>
-  <p class="text-sm text-text-muted max-w-2xl mx-auto mb-10 -mt-4">
-    Pyrite is alpha: solid for one person and their agents. Multi-user is
-    experimental — <a href="/docs/status" class="underline hover:text-text-secondary"
-      >see what's supported</a
-    >.
-  </p>
-  <div class="flex flex-col sm:flex-row gap-4 justify-center">
-    <a
-      href="https://demo.pyrite.wiki"
-      class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-pyrite-500 text-surface font-semibold hover:bg-pyrite-400 transition-colors"
+<section
+  aria-labelledby="hero-title"
+  class="max-w-[1200px] mx-auto px-[clamp(16px,4vw,40px)] pt-[clamp(56px,8vw,112px)] pb-[clamp(56px,7vw,96px)] grid grid-cols-[repeat(auto-fit,minmax(min(460px,100%),1fr))] gap-14 items-center"
+>
+  <div class="flex flex-col gap-6">
+    <div class="eyebrow">Knowledge as code</div>
+    <h1
+      id="hero-title"
+      class="font-serif font-semibold text-[clamp(34px,4.6vw,56px)] leading-[1.1] tracking-[-0.015em] text-balance"
     >
-      Try the demo
-    </a>
-    <a
-      href="#quickstart"
-      class="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-white/20 text-text-primary font-semibold hover:border-white/40 transition-colors"
-    >
-      Install it
-    </a>
+      Knowledge you can verify, version, and hand to an agent.
+    </h1>
+    <p class="text-lg leading-[1.6] text-text-secondary max-w-[34rem] text-pretty">
+      Pyrite keeps what you know as typed markdown in git. Every entry is
+      checked against a schema, every change is a commit, and every AI agent you
+      connect gets exactly the access you grant it, through MCP.
+    </p>
+    <div class="flex flex-wrap gap-3 pt-2">
+      <a class="btn btn-primary min-h-12 px-[22px] text-[15px]" href="https://demo.pyrite.wiki">Try the demo</a>
+      <a class="btn btn-secondary min-h-12 px-[22px] text-[15px]" href="#install">Install it</a>
+    </div>
+    <div class="flex items-center gap-2.5 text-[13px] leading-[1.45] text-text-secondary">
+      <span aria-hidden="true" class="size-2 rounded-full bg-warn shrink-0"></span>
+      <span>
+        <span class="capitalize">{status.stage}</span>. Solid for one person;
+        multi-user is experimental.
+        <a href="/docs/status" class="link">What's supported</a>
+      </span>
+    </div>
   </div>
+
+  <figure
+    aria-label="A Pyrite entry and a search that finds it"
+    class="bg-surface-raised border border-line rounded-[10px] overflow-hidden font-mono text-[13px] leading-[1.7]"
+  >
+    <div class="flex items-center justify-between gap-3 px-[18px] py-3 border-b border-line bg-surface-overlay">
+      <span class="text-text-secondary text-xs">my-kb/people/sarah-chen.md</span>
+      <span class="font-sans text-[11px] font-semibold tracking-[0.08em] uppercase px-2.5 py-0.5 border border-line rounded-full text-text-secondary">person</span>
+    </div>
+    <div class="px-[18px] pt-5 pb-[18px] overflow-x-auto [&>div]:whitespace-pre">
+      <div class="text-text-secondary">---</div>
+      <div><span class="text-brand">type:</span> person</div>
+      <div><span class="text-brand">title:</span> Sarah Chen</div>
+      <div class="text-text-secondary">---</div>
+      <div class="pt-1.5">Engineering lead. Considering move to consulting.</div>
+    </div>
+    <div class="p-[18px] border-t border-dashed border-line bg-surface overflow-x-auto [&>div]:whitespace-pre">
+      <div><span class="text-text-secondary">$</span> pyrite search "career transition"</div>
+      <div class="text-ok">{"  person  Sarah Chen"}</div>
+      <div class="text-text-secondary"># found by meaning, not by keyword</div>
+    </div>
+  </figure>
 </section>

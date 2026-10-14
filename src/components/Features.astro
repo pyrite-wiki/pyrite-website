@@ -1,57 +1,44 @@
 ---
 const features = [
   {
-    title: "Typed entries with schema validation",
+    title: "Typed entries, checked on every write",
     description:
-      "Not flat vector blobs. Define person, decision, event, component types with validated fields. Query structurally, not just by vibes.",
-    icon: "{}",
+      "Define person, decision, event or component types in <code>kb.yaml</code>. Every write is validated against the schema, whether a person or an agent made it.",
   },
   {
-    title: "Git-native storage",
+    title: "Every change is a commit",
     description:
-      "Every change is a versioned commit. Branch, diff, review, rollback. Your knowledge has a full audit trail.",
-    icon: "git",
+      "Markdown with YAML frontmatter, versioned in git. Branch, diff, review and roll back what you know the same way you do code.",
   },
   {
-    title: "MCP server with three-tier access",
+    title: "Search by meaning and by structure",
     description:
-      "Read/write/admin tiers. Give untrusted agents read-only. Give your own agents write. Keep admin for yourself.",
-    icon: "key",
+      "Vector search finds what an entry is about. Structured queries find it by type, tag, date range or relationship. Use both at once.",
   },
   {
-    title: "Semantic + structured search",
+    title: "Yours, on your disk",
     description:
-      "Find by meaning (vector embeddings) AND by type, tag, date range, or relationship. Both at once in hybrid mode.",
-    icon: "search",
-  },
-  {
-    title: "Plugin system",
-    description:
-      "Custom entry types, MCP tools, CLI commands, validators, lifecycle hooks, relationship semantics. Six extensions ship out of the box.",
-    icon: "plug",
-  },
-  {
-    title: "Zero running cost locally",
-    description:
-      "Markdown files + SQLite on your disk. No cloud dependency, no subscription, no vendor lock-in. Your data is plain text.",
-    icon: "disk",
+      "Plain files plus a SQLite index you can rebuild at any time. No cloud dependency, no subscription, nothing to export your way out of.",
   },
 ];
 ---
 
-<section class="px-6 py-20 max-w-6xl mx-auto">
-  <h2 class="text-3xl font-bold text-center mb-12">
-    Why Pyrite instead of vectors-in-Postgres or Notion+AI?
-  </h2>
-  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+<section id="why" aria-labelledby="why-title" class="home-section flex flex-col gap-12">
+  <div class="flex flex-col gap-4 max-w-[44rem]">
+    <h2 id="why-title" class="section-title">Built for knowledge that has to hold up</h2>
+    <p class="text-[17px] text-text-secondary text-pretty">
+      Most AI memory is a pile of embeddings. Most wikis are a pile of pages.
+      Pyrite treats knowledge the way you already treat code: typed, reviewed,
+      versioned, and readable by machines and people alike.
+    </p>
+  </div>
+  <div class="grid grid-cols-[repeat(auto-fit,minmax(min(250px,100%),1fr))] gap-x-8 gap-y-10">
     {
-      features.map((f) => (
-        <div class="p-6 rounded-xl bg-surface-raised border border-white/5">
-          <div class="text-pyrite-400 font-mono text-sm mb-3">{f.icon}</div>
-          <h3 class="text-lg font-semibold mb-2">{f.title}</h3>
-          <p class="text-text-secondary text-sm leading-relaxed">
-            {f.description}
-          </p>
+      features.map((f, i) => (
+        <div class="flex flex-col gap-2.5 pt-5 border-t border-line">
+          <span class="font-mono text-xs text-brand">{String(i + 1).padStart(2, "0")}</span>
+          <h3 class="text-base font-semibold leading-[1.4]">{f.title}</h3>
+          <p class="text-text-secondary [&_code]:font-mono [&_code]:text-[13px] [&_code]:text-text-primary" set:html={f.description} />
         </div>
       ))
     }

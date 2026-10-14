@@ -1,57 +1,73 @@
 ---
+const steps = [
+  {
+    comment: "Get it",
+    lines: ['git clone https://github.com/pyrite-wiki/pyrite.git && cd pyrite', 'pip install -e ".[all]"'],
+  },
+  {
+    comment: "Start a knowledge base",
+    lines: ["pyrite init --template research --path my-kb && cd my-kb"],
+  },
+  {
+    comment: "Add an entry, then find it",
+    lines: [
+      'pyrite create --type person --title "Sarah Chen" \\',
+      '  --body "Engineering lead. Considering move to consulting."',
+      'pyrite search "career transition"',
+    ],
+  },
+  { comment: "Connect Claude", lines: ["pyrite mcp-setup"] },
+];
 ---
 
-<section id="quickstart" class="px-6 py-20 max-w-4xl mx-auto">
-  <h2 class="text-3xl font-bold text-center mb-4">Install locally</h2>
-  <p class="text-text-secondary text-center mb-10">
-    Clone the repo, install, create a KB, connect to Claude. There is no PyPI
-    package yet.
-  </p>
-
-  <div class="bg-surface-raised rounded-xl border border-white/5 p-6">
-    <div class="font-mono text-sm space-y-1">
-      <p class="text-text-muted"># Install</p>
-      <p>
-        <span class="text-pyrite-400">$</span> git clone https://github.com/pyrite-wiki/pyrite.git && cd pyrite
-      </p>
-      <p>
-        <span class="text-pyrite-400">$</span> pip install -e ".[all]"
-      </p>
-      <p></p>
-      <p class="text-text-muted"># Create a knowledge base</p>
-      <p>
-        <span class="text-pyrite-400">$</span> pyrite init --template research
-        --path my-kb && cd my-kb
-      </p>
-      <p></p>
-      <p class="text-text-muted"># Add some knowledge</p>
-      <p>
-        <span class="text-pyrite-400">$</span> pyrite create --type person
-        --title "Sarah Chen" \
-      </p>
-      <p class="pl-6">
-        --body "Engineering lead. Considering move to consulting."
-      </p>
-      <p></p>
-      <p class="text-text-muted"># Search (keyword, semantic, or hybrid)</p>
-      <p>
-        <span class="text-pyrite-400">$</span> pyrite search "career transition"
-      </p>
-      <p></p>
-      <p class="text-text-muted"># Connect to Claude Desktop or Claude Code</p>
-      <p>
-        <span class="text-pyrite-400">$</span> pyrite mcp-setup
-        <span class="text-text-muted"
-          >&nbsp;&nbsp;# writes the MCP config for you</span
-        >
-      </p>
+<section
+  id="install"
+  aria-labelledby="install-title"
+  class="home-section flex flex-wrap gap-x-12 gap-y-10 items-start"
+>
+  <div class="flex-[2_1_520px] min-w-0 flex flex-col gap-6">
+    <div class="flex flex-col gap-4">
+      <div class="eyebrow">Install</div>
+      <h2 id="install-title" class="section-title">From clone to first search</h2>
+      <p class="text-text-secondary">There is no PyPI package yet: install from a clone.</p>
     </div>
+    <figure
+      aria-label="Install commands"
+      class="bg-surface-raised border border-line rounded-[10px] font-mono text-[13px] leading-[1.8] p-5 overflow-x-auto [&>div]:whitespace-pre"
+    >
+      {
+        steps.map((s, i) => (
+          <>
+            <div class:list={["text-text-secondary", { "pt-3": i > 0 }]}>{`# ${i + 1}  ${s.comment}`}</div>
+            {s.lines.map((l) => <div>{l}</div>)}
+          </>
+        ))
+      }
+    </figure>
+    <p class="text-sm text-text-secondary">
+      <a
+        href="https://github.com/pyrite-wiki/pyrite/blob/main/docs/tutorials/pyrite-in-20-minutes.md"
+        class="link font-medium">Take the 20-minute tutorial</a
+      >. CI runs it as a test, so it works as written.
+    </p>
   </div>
-  <p class="text-text-muted text-sm text-center mt-6">
-    Then try the
-    <a
-      href="https://github.com/pyrite-wiki/pyrite/blob/main/docs/tutorials/pyrite-in-20-minutes.md"
-      class="underline hover:text-text-secondary">Pyrite in 20 minutes</a
-    > tutorial — CI runs it as a test, so it works as written.
-  </p>
+
+  <div id="self-host" class="flex-[1_1_300px] min-w-0 flex flex-col gap-4 p-7 bg-surface-raised border border-line rounded-[10px]">
+    <span class="eyebrow !text-text-secondary">Self-host for a team</span>
+    <h3 class="font-serif font-semibold text-[22px] leading-[1.25]">A shared instance for about $6 a month</h3>
+    <p class="text-sm text-text-secondary leading-[1.55]">
+      Ubuntu VPS with Docker, automatic TLS through Caddy. Setup takes about two
+      minutes.
+    </p>
+    <div class="font-mono text-[12.5px] leading-[1.7] bg-surface border border-line rounded-md p-3.5 overflow-x-auto [&>div]:whitespace-pre"><div>bash deploy/selfhost/setup.sh \</div><div>{"  kb.example.com"}</div></div>
+    <div class="flex gap-2.5 items-start text-[13px] leading-normal text-text-secondary">
+      <span aria-hidden="true" class="size-2 mt-1.5 rounded-full bg-warn shrink-0"></span>
+      <span>
+        <strong class="text-text-primary font-semibold">Multi-user is experimental</strong>
+        and not yet a security boundary. Don't store anything every user
+        shouldn't see.
+      </span>
+    </div>
+    <a href="/docs/deploy" class="link text-sm font-medium">Self-hosting guide</a>
+  </div>
 </section>
