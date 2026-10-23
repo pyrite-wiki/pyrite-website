@@ -7,7 +7,7 @@
  * Verify the counts against the source, not the README:
  *   mcpTools  -> `pyrite mcp --help`, whose counts are generated from the live
  *                tool registry. The tiers are CUMULATIVE and include plugin
- *                tools: read 72, write = read + 31, admin = write + 9. Do not
+ *                tools: read 66, write = read + 31, admin = write + 9. Do not
  *                use the READ_TOOLS/WRITE_TOOLS/ADMIN_TOOLS dicts in
  *                tool_schemas.py — those are core tools only and undercount
  *                the exposed surface.
@@ -16,40 +16,40 @@
  *   tests -> python -m pytest --collect-only -q | tail -1
  */
 export const release = {
-  version: "0.25.7",
-  date: "2026-10-13",
-  url: "https://github.com/pyrite-wiki/pyrite/releases/tag/v0.25.7",
+  version: "0.26.0",
+  date: "2026-10-22",
+  url: "https://github.com/pyrite-wiki/pyrite/releases/tag/v0.26.0",
   /** Set true when a release carries fixes users should upgrade for. */
   security: true,
   securityNote:
-    "0.25.1–0.25.5 were security releases for servers with accounts turned on or reachable by other people, and 0.25.7 fixes a save that could drop a body's first line. If you are on 0.24.x, upgrade, then run pyrite index build once.",
+    "Writes to a KB entry now stay inside the KB root, which matters for any KB that contains symbolic links. For instances with more than one user, which stay experimental: one landing rule decides where every write lands, and request bodies are bounded. Run pyrite index build once after upgrading; link counts change. Details: https://github.com/pyrite-wiki/pyrite/issues/1258",
   /** One line for the homepage banner. Keep it short: it sits beside the version. */
-  bannerNote: "Security fixes. Coming from 0.24.x? Rebuild your index after upgrading.",
-  /** The headline for this release, from the 0.25.7 release notes. */
+  bannerNote: "Run pyrite index build once after upgrading. The cascade extension, the built-in public site and the Streamlit UI are removed.",
+  /** The headline for this release, from the 0.26.0 release notes. */
   headline:
-    "The first hour works. Install from the README, connect Claude Code or Claude Desktop with pyrite mcp-setup, and everything does what the docs say — a tutorial that CI runs as a test keeps it that way.",
+    "Your files, exactly. A write changes only what was asked (ADR-0042, ADR-0051): create, update, link, rename and schema migrate are operations on the file's own text, so comments, key order, quoting and line endings stay as written, and a request that changes nothing writes nothing.",
 } as const;
 
 export const counts = {
   /** Total tools exposed at the admin tier — the full surface. */
-  mcpTools: 112,
+  mcpTools: 106,
   /** Cumulative per tier, plugin tools included. */
-  mcpRead: 72,
-  mcpWrite: 103,
-  mcpAdmin: 112,
+  mcpRead: 66,
+  mcpWrite: 97,
+  mcpAdmin: 106,
   /** Tools each tier adds on top of the one below it. */
   mcpWriteAdds: 31,
   mcpAdminAdds: 9,
-  extensions: 6,
+  extensions: 5,
   extensionPoints: 19,
   entryTypes: 11,
-  /** `pytest --collect-only` at v0.25.7: 12527/12553 collected. */
-  tests: "12,500+",
+  /** `pytest --collect-only` at v0.26.0: 21663/21689 collected (collected, not passing). */
+  tests: "21,600+",
 } as const;
 
 /**
  * What the project supports at this release, and what it marks experimental.
- * Source: the v0.25.7 README, SECURITY.md and docs/tutorials. Re-read them
+ * Source: the v0.26.0 README, SECURITY.md and docs/tutorials. Re-read them
  * each release — this list moves.
  */
 export const status = {
@@ -60,13 +60,13 @@ export const status = {
     "The index and search (keyword, semantic, hybrid)",
     "The CLI",
     "The core MCP tools, at the read, write and admin tiers",
-    "software-kb and cascade extensions",
+    "The software-kb extension",
   ],
   experimental: [
     {
       name: "Multi-user",
       detail:
-        "Accounts, per-KB permissions, anonymous readers, the public /site and shared or internet-facing servers. They work, and every release closes more gaps, but they are not yet a boundary between people who should not see each other's data.",
+        "Accounts, per-KB permissions, anonymous readers and shared or internet-facing servers. They work, and every release closes more gaps, but they are not yet a boundary between people who should not see each other's data.",
     },
     {
       name: "Postgres backend",

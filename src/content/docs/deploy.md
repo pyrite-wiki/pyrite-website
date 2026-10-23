@@ -27,10 +27,10 @@ This installs Docker, starts Pyrite + Caddy (auto TLS), and seeds the Pyrite KB 
 
 ```bash
 docker compose -f deploy/selfhost/docker-compose.yml exec pyrite \
-  python /app/deploy/selfhost/create-user.py admin yourpassword
+  pyrite-admin user create admin --role admin
 ```
 
-Auth is required and registration is closed by default. The first user always gets the admin role; add more users with the same command (`--admin` for admin role).
+It prompts for the password. Auth is required and registration is closed by default; add more users with the same command (`--role` is `read`, `write` or `admin`).
 
 ### Update to latest
 

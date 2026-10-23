@@ -260,18 +260,17 @@ The plugin protocol supports much more:
 | `get_collection_types()` | Custom collection types |
 | `get_relationship_types()` | Semantic relationship definitions |
 
-See the [Plugin Protocol](/docs/plugin-protocol) reference for the full API, or browse the six built-in extensions in the `extensions/` directory for real-world examples.
+See the [Plugin Protocol](/docs/plugin-protocol) reference for the full API, or browse the five built-in extensions in the `extensions/` directory for real-world examples.
 
 ## Shipping extensions
 
-Six extensions ship with Pyrite:
+Five extensions ship with Pyrite:
 
 | Extension | Types | Purpose |
 |-----------|-------|---------|
 | **software-kb** | ADRs, components, backlog, standards | Software project management |
 | **zettelkasten** *(example plugin)* | Notes with maturity levels | CEQRC knowledge workflow |
 | **encyclopedia** *(example plugin)* | Articles, reviews | Collaborative knowledge |
-| **cascade** | Timeline events, actors | Chronological research |
 | **journalism-investigation** *(experimental)* | Sources, claims, evidence chains | Investigative research |
 | **social** *(example plugin)* | Social interactions | Engagement tracking |
 
