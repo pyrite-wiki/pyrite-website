@@ -68,7 +68,7 @@ my-plugin = "my_plugin:MyPlugin"
 
 ## Shipping extensions
 
-Six extensions ship with Pyrite:
+Five extensions ship with Pyrite:
 
 | Extension | Purpose | Key Types |
 |-----------|---------|-----------|
@@ -76,7 +76,6 @@ Six extensions ship with Pyrite:
 | **zettelkasten** *(example plugin)* | CEQRC maturity workflow | Notes with maturity progression |
 | **encyclopedia** *(example plugin)* | Articles with review workflow | Articles, reviews, voting |
 | **social** *(example plugin)* | Engagement tracking | Social interactions |
-| **cascade** | Timeline research | Timeline events, actors, capture lanes |
 | **journalism-investigation** *(experimental)* | Investigative research | Sources, claims, actors, evidence chains |
 
 The three example plugins are reference code showing how a plugin adds entry
@@ -93,7 +92,6 @@ pip install -e extensions/software-kb
 pip install -e extensions/zettelkasten
 pip install -e extensions/encyclopedia
 pip install -e extensions/social
-pip install -e extensions/cascade
 pip install -e extensions/journalism-investigation
 ```
 
