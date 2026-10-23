@@ -85,48 +85,62 @@ export const status = {
 } as const;
 
 /**
- * Community figures as of v0.25.7 (2026-10-13). Measured, not asserted:
- *   mergedPrs/outsidePrs -> `gh pr list --state merged`, merged on or before
- *     the tag, dependabot excluded.
+ * Community figures as of 2026-10-23 (after v0.26.0). Measured, not asserted:
+ *   mergedPrs/outsidePrs -> `gh pr list --state merged`, dependabot excluded.
  *   contributors -> GitHub's contributor list plus commit authors and
  *     Co-authored-by trailers, with people who commit under two names
- *     counted once.
+ *     counted once. Three co-authors with no mappable GitHub login are not
+ *     counted.
  */
 export const community = {
-  /** People with code in the release, the maintainer included. */
-  people: 23,
-  outsideContributors: 22,
+  /** People with code in the project, the maintainer included. */
+  people: 37,
+  outsideContributors: 36,
   /** The release the site last compared against, and its outside contributors. */
   previousVersion: "0.24.3",
   outsideContributorsAtPrevious: 6,
-  mergedPrs: 354,
-  outsidePrs: 77,
-  /** Open PRs on 2026-10-13, and how many of them are from contributors. */
-  openPrs: 62,
-  openPrsFromContributors: 59,
-  /** GitHub logins, most merged work first. */
+  mergedPrs: 570,
+  outsidePrs: 181,
+  /** Open PRs on 2026-10-23, and how many of them are from contributors. */
+  openPrs: 41,
+  openPrsFromContributors: 41,
+  /** GitHub logins: merged PRs first (most first), then commit- or co-author-only. */
   contributors: [
+    "ANO3457",
     "makiaveli1",
     "sb123sb123",
-    "ANO3457",
-    "zhongxiao-chang",
     "berkay-byte",
     "AbelTomato",
+    "nosmile99",
     "AsyncLegs",
-    "Gambit-Checkmate",
-    "fatihcvs",
     "HarshRajSinghania",
-    "Saturday-boyi",
+    "Enard52",
+    "fatihcvs",
+    "hiyouwhatsapp",
+    "zhongxiao-chang",
     "DYNOSuprovo",
     "fathirramadhan-web",
     "feliperzk",
+    "Gambit-Checkmate",
     "Jah-yee",
+    "jinchuntan",
+    "KingEmma7",
     "kudala-bharani",
+    "masyarakatai",
     "nightcityblade",
+    "O1sumitkumar",
+    "Plastic-time",
+    "pratham8499",
+    "premiuslol",
+    "Primaverah",
+    "rahul05ranjan",
     "ShivanshShukla",
-    "Voyagerroc-Lab",
+    "Uddoo",
     "xuu33030",
     "YaoSong808",
     "ZhaoYJ9",
+    "rupayon123",
+    "Saturday-boyi",
+    "Voyagerroc-Lab",
   ],
 } as const;
