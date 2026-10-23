@@ -22,7 +22,7 @@ export const release = {
   /** Set true when a release carries fixes users should upgrade for. */
   security: true,
   securityNote:
-    "For instances with more than one user, which stay experimental: a write to a KB entry stays inside the KB root, one landing rule decides where a signed-in user's write lands on every REST route and MCP tool, and the server bounds the size of a request body. After upgrading, run pyrite index build once; link counts change.",
+    "Writes to a KB entry now stay inside the KB root, which matters for any KB that contains symbolic links. For instances with more than one user, which stay experimental: one landing rule decides where every write lands, and request bodies are bounded. Run pyrite index build once after upgrading; link counts change. Details: https://github.com/pyrite-wiki/pyrite/issues/1258",
   /** One line for the homepage banner. Keep it short: it sits beside the version. */
   bannerNote: "Run pyrite index build once after upgrading. The cascade extension, the built-in public site and the Streamlit UI are removed.",
   /** The headline for this release, from the 0.26.0 release notes. */
@@ -43,7 +43,7 @@ export const counts = {
   extensions: 5,
   extensionPoints: 19,
   entryTypes: 11,
-  /** `pytest --collect-only` at v0.26.0: 21663/21689 collected. */
+  /** `pytest --collect-only` at v0.26.0: 21663/21689 collected (collected, not passing). */
   tests: "21,600+",
 } as const;
 
