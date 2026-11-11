@@ -5,7 +5,7 @@ order: 0
 section: get-started
 ---
 
-Pyrite is **alpha**. As of v0.26.0 it is solid for **one person and their
+Pyrite is **alpha**. As of v0.26.2 it is solid for **one person and their
 agents, working locally** — and for a small team that trusts each other. That
 is what the project tests, documents and fixes first.
 
