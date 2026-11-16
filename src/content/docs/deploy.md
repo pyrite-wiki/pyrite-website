@@ -80,6 +80,17 @@ All settings are configurable via environment variables — no config file editi
 | `PYRITE_ALLOWED_HOSTS` | Extra hostnames a credential-free server answers (LAN IP, `*.local`, proxy name) | unset |
 | `PYRITE_SEARCH_MODE` | Default search mode | `keyword` |
 | `PYRITE_DATA_DIR` | Data storage path | `/data` |
+| `PYRITE_GIT_PROXY` | The one proxy network git and GitHub API calls made for network callers use | unset |
+
+### Network git (since 0.26.3)
+
+Git run for a REST or MCP-over-HTTP caller no longer uses the server account's
+ssh agent, keys, credential helpers, netrc or proxy variables. To let network
+callers push to or sync a private repository, add a `git_credentials` entry in
+`config.yaml` for that host. Set `git_identity` for the commits Pyrite makes
+for them; the fallback to the account's global identity is removed in 0.27.0.
+See "Upgrading to 0.26.3: network git" in
+[docs/configuration.md](https://github.com/pyrite-wiki/pyrite/blob/main/docs/configuration.md).
 
 ### AI provider keys (optional)
 
