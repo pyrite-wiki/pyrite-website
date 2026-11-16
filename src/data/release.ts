@@ -16,18 +16,18 @@
  *   tests -> python -m pytest --collect-only -q | tail -1
  */
 export const release = {
-  version: "0.26.0",
-  date: "2026-10-22",
-  url: "https://github.com/pyrite-wiki/pyrite/releases/tag/v0.26.0",
+  version: "0.26.3",
+  date: "2026-11-16",
+  url: "https://github.com/pyrite-wiki/pyrite/releases/tag/v0.26.3",
   /** Set true when a release carries fixes users should upgrade for. */
   security: true,
   securityNote:
-    "Writes to a KB entry now stay inside the KB root, which matters for any KB that contains symbolic links. For instances with more than one user, which stay experimental: one landing rule decides where every write lands, and request bodies are bounded. Run pyrite index build once after upgrading; link counts change. Details: https://github.com/pyrite-wiki/pyrite/issues/1258",
+    "If you run pyrite serve, upgrade. A request over REST or MCP-over-HTTP now gets only the git credential you configure for it, learns nothing from files outside a KB, sees only text Pyrite wrote for it, and gets exactly the default_role your config.yaml says. Private repositories reached over the network need a git_credentials entry. The local CLI and stdio MCP are unchanged.",
   /** One line for the homepage banner. Keep it short: it sits beside the version. */
-  bannerNote: "Run pyrite index build once after upgrading. The cascade extension, the built-in public site and the Streamlit UI are removed.",
-  /** The headline for this release, from the 0.26.0 release notes. */
+  bannerNote: "Security release for anyone running pyrite serve. Network git over a private repository now needs a git_credentials entry.",
+  /** The headline for this release, from the 0.26.3 release notes. */
   headline:
-    "Your files, exactly. A write changes only what was asked (ADR-0042, ADR-0051): create, update, link, rename and schema migrate are operations on the file's own text, so comments, key order, quoting and line endings stay as written, and a request that changes nothing writes nothing.",
+    "A network call borrows nothing of the server account, continued (ADR-0052): network git gets only the credential you grant it, reads stay inside the KB, responses carry only Pyrite's own text, and default_role is exactly what config.yaml says.",
 } as const;
 
 export const counts = {
@@ -43,8 +43,8 @@ export const counts = {
   extensions: 5,
   extensionPoints: 19,
   entryTypes: 11,
-  /** `pytest --collect-only` at v0.26.0: 21663/21689 collected (collected, not passing). */
-  tests: "21,600+",
+  /** `pytest --collect-only` at v0.26.3: 26066/26092 collected (collected, not passing). */
+  tests: "26,000+",
 } as const;
 
 /**
